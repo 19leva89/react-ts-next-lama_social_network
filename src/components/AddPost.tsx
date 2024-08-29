@@ -23,7 +23,7 @@ const AddPost = () => {
 			{/* AVATAR */}
 			<Image
 				src={user?.imageUrl || '/noAvatar.png'}
-				alt=""
+				alt="avatar"
 				width={48}
 				height={48}
 				className="w-12 h-12 object-cover rounded-full"
@@ -41,7 +41,7 @@ const AddPost = () => {
 					<div className="">
 						<Image
 							src="/emoji.png"
-							alt=""
+							alt="emoji"
 							width={20}
 							height={20}
 							className="w-5 h-5 cursor-pointer self-end"
@@ -61,22 +61,22 @@ const AddPost = () => {
 						{({ open }) => {
 							return (
 								<div className="flex items-center gap-2 cursor-pointer" onClick={() => open()}>
-									<Image src="/addimage.png" alt="" width={20} height={20} />
+									<Image src="/addimage.png" alt="add image" width={20} height={20} />
 									Photo
 								</div>
 							)
 						}}
 					</CldUploadWidget>
 					<div className="flex items-center gap-2 cursor-pointer">
-						<Image src="/addVideo.png" alt="" width={20} height={20} />
+						<Image src="/addVideo.png" alt="add video" width={20} height={20} />
 						Video
 					</div>
 					<div className="flex items-center gap-2 cursor-pointer">
-						<Image src="/poll.png" alt="" width={20} height={20} />
+						<Image src="/poll.png" alt="poll" width={20} height={20} />
 						Poll
 					</div>
 					<div className="flex items-center gap-2 cursor-pointer">
-						<Image src="/addevent.png" alt="" width={20} height={20} />
+						<Image src="/addevent.png" alt="add event" width={20} height={20} />
 						Event
 					</div>
 				</div>

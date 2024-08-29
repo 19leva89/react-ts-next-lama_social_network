@@ -68,7 +68,7 @@ const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: stri
 						<div className="flex flex-col items-center gap-2 cursor-pointer relative">
 							<Image
 								src={img?.secure_url || user?.imageUrl || '/noAvatar.png'}
-								alt=""
+								alt="avatar"
 								width={80}
 								height={80}
 								className="w-20 h-20 rounded-full ring-2 object-cover"
@@ -91,7 +91,7 @@ const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: stri
 				<div className="flex flex-col items-center gap-2 cursor-pointer" key={story.id}>
 					<Image
 						src={story.user.avatar || '/noAvatar.png'}
-						alt=""
+						alt="avatar"
 						width={80}
 						height={80}
 						className="w-20 h-20 rounded-full ring-2"

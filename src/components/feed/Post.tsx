@@ -26,7 +26,7 @@ const Post = ({ post }: { post: FeedPostType }) => {
 						src={post.user.avatar || '/noAvatar.png'}
 						width={40}
 						height={40}
-						alt=""
+						alt="avatar"
 						className="w-10 h-10 rounded-full"
 					/>
 					<span className="font-medium">
@@ -41,7 +41,7 @@ const Post = ({ post }: { post: FeedPostType }) => {
 			<div className="flex flex-col gap-4">
 				{post.img && (
 					<div className="w-full min-h-96 relative">
-						<Image src={post.img} fill className="object-cover rounded-md" alt="" />
+						<Image src={post.img} fill className="object-cover rounded-md" alt="post img" />
 					</div>
 				)}
 				<p>{post.desc}</p>

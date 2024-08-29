@@ -48,7 +48,7 @@ const PostInteraction = ({
 								src={optimisticLike.isLiked ? '/liked.png' : '/like.png'}
 								width={16}
 								height={16}
-								alt=""
+								alt="liked"
 								className="cursor-pointer"
 							/>
 						</button>
@@ -60,7 +60,7 @@ const PostInteraction = ({
 					</span>
 				</div>
 				<div className="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
-					<Image src="/comment.png" width={16} height={16} alt="" className="cursor-pointer" />
+					<Image src="/comment.png" width={16} height={16} alt="comment" className="cursor-pointer" />
 					<span className="text-gray-300">|</span>
 					<span className="text-gray-500">
 						{commentNumber}
@@ -70,7 +70,7 @@ const PostInteraction = ({
 			</div>
 			<div className="">
 				<div className="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
-					<Image src="/share.png" width={16} height={16} alt="" className="cursor-pointer" />
+					<Image src="/share.png" width={16} height={16} alt="share" className="cursor-pointer" />
 					<span className="text-gray-300">|</span>
 					<span className="text-gray-500">
 						<span className="hidden md:inline"> Share</span>

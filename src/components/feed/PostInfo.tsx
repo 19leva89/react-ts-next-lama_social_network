@@ -15,7 +15,7 @@ const PostInfo = ({ postId }: { postId: number }) => {
 				src="/more.png"
 				width={16}
 				height={16}
-				alt=""
+				alt="more"
 				onClick={() => setOpen((prev) => !prev)}
 				className="cursor-pointer"
 			/>

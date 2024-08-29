@@ -46,7 +46,7 @@ const UpdateUser = ({ user }: { user: User }) => {
 										<div className="flex items-center gap-2 cursor-pointer">
 											<Image
 												src={user.cover || '/noCover.png'}
-												alt=""
+												alt="cover"
 												width={48}
 												height={32}
 												className="w-12 h-8 rounded-md object-cover"
