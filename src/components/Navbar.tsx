@@ -65,7 +65,10 @@ const Navbar = () => {
 
 					<SignedOut>
 						<div className="flex items-center gap-2 text-sm">
-							<Image src="/login.png" alt="login" width={20} height={20} />
+							<Link href="/sign-in">
+								<Image src="/login.png" alt="login" width={20} height={20} />
+							</Link>
+
 							<Link href="/sign-in">Login/Register</Link>
 						</div>
 					</SignedOut>

@@ -17,6 +17,7 @@ type FeedPostType = PostType & { user: User } & {
 
 const Post = ({ post }: { post: FeedPostType }) => {
 	const { userId } = auth()
+
 	return (
 		<div className="flex flex-col gap-4">
 			{/* USER */}
@@ -29,14 +30,17 @@ const Post = ({ post }: { post: FeedPostType }) => {
 						alt="avatar"
 						className="w-10 h-10 rounded-full"
 					/>
+
 					<span className="font-medium">
 						{post.user.name && post.user.surname
 							? post.user.name + ' ' + post.user.surname
 							: post.user.username}
 					</span>
 				</div>
+
 				{userId === post.user.id && <PostInfo postId={post.id} />}
 			</div>
+
 			{/* DESC */}
 			<div className="flex flex-col gap-4">
 				{post.img && (
@@ -44,8 +48,10 @@ const Post = ({ post }: { post: FeedPostType }) => {
 						<Image src={post.img} fill className="object-cover rounded-md" alt="post img" />
 					</div>
 				)}
+
 				<p>{post.desc}</p>
 			</div>
+
 			{/* INTERACTION */}
 			<Suspense fallback="Loading...">
 				<PostInteraction
@@ -54,6 +60,7 @@ const Post = ({ post }: { post: FeedPostType }) => {
 					commentNumber={post._count.comments}
 				/>
 			</Suspense>
+
 			<Suspense fallback="Loading...">
 				<Comments postId={post.id} />
 			</Suspense>

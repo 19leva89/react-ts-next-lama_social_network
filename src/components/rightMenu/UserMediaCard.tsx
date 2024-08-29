@@ -22,10 +22,12 @@ const UserMediaCard = async ({ user }: { user: User }) => {
 			{/* TOP */}
 			<div className="flex justify-between items-center font-medium">
 				<span className="text-gray-500">User Media</span>
+
 				<Link href="/" className="text-blue-500 text-xs">
 					See all
 				</Link>
 			</div>
+
 			{/* BOTTOM */}
 			<div className="flex gap-4 justify-between flex-wrap">
 				{postsWithMedia.length

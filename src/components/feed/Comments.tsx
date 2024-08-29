@@ -11,6 +11,7 @@ const Comments = async ({ postId }: { postId: number }) => {
 			user: true,
 		},
 	})
+
 	return (
 		<div className="">
 			{/* WRITE */}

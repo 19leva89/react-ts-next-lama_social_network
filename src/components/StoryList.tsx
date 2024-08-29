@@ -54,6 +54,7 @@ const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: stri
 		value,
 		...state,
 	])
+
 	return (
 		<>
 			<CldUploadWidget
@@ -74,6 +75,7 @@ const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: stri
 								className="w-20 h-20 rounded-full ring-2 object-cover"
 								onClick={() => open()}
 							/>
+
 							{img ? (
 								<form action={add}>
 									<button className="text-xs bg-blue-500 p-1 rounded-md text-white">Send</button>
@@ -86,6 +88,7 @@ const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: stri
 					)
 				}}
 			</CldUploadWidget>
+
 			{/* STORY */}
 			{optimisticStories.map((story) => (
 				<div className="flex flex-col items-center gap-2 cursor-pointer" key={story.id}>
@@ -96,6 +99,7 @@ const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: stri
 						height={80}
 						className="w-20 h-20 rounded-full ring-2"
 					/>
+
 					<span className="font-medium">{story.user.name || story.user.username}</span>
 				</div>
 			))}

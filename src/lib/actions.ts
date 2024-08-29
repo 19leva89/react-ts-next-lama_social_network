@@ -267,7 +267,7 @@ export const addPost = async (formData: FormData, img: string) => {
   const validatedDesc = Desc.safeParse(desc);
 
   if (!validatedDesc.success) {
-    //TODO
+    // TODO
     console.log("description is not valid");
     return;
   }

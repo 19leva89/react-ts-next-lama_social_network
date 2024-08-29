@@ -28,6 +28,7 @@ const AddPost = () => {
 				height={48}
 				className="w-12 h-12 object-cover rounded-full"
 			/>
+
 			{/* POST */}
 			<div className="flex-1">
 				{/* TEXT INPUT */}
@@ -38,6 +39,7 @@ const AddPost = () => {
 						name="desc"
 						onChange={(e) => setDesc(e.target.value)}
 					></textarea>
+
 					<div className="">
 						<Image
 							src="/emoji.png"
@@ -46,9 +48,11 @@ const AddPost = () => {
 							height={20}
 							className="w-5 h-5 cursor-pointer self-end"
 						/>
+
 						<AddPostButton />
 					</div>
 				</form>
+
 				{/* POST OPTIONS */}
 				<div className="flex items-center gap-4 mt-4 text-gray-400 flex-wrap">
 					<CldUploadWidget
@@ -67,14 +71,17 @@ const AddPost = () => {
 							)
 						}}
 					</CldUploadWidget>
+
 					<div className="flex items-center gap-2 cursor-pointer">
 						<Image src="/addVideo.png" alt="add video" width={20} height={20} />
 						Video
 					</div>
+
 					<div className="flex items-center gap-2 cursor-pointer">
 						<Image src="/poll.png" alt="poll" width={20} height={20} />
 						Poll
 					</div>
+
 					<div className="flex items-center gap-2 cursor-pointer">
 						<Image src="/addevent.png" alt="add event" width={20} height={20} />
 						Event
