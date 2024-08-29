@@ -21,6 +21,7 @@ const RightMenu = ({ user }: { user?: User }) => {
 					</Suspense>
 				</>
 			) : null}
+
 			<FriendRequests />
 
 			<Birthdays />

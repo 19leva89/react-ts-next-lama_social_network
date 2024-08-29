@@ -31,7 +31,7 @@ const ProfileCard = async () => {
 
 				<Image
 					src={user.avatar || '/noAvatar.png'}
-					alt="Avatar"
+					alt="avatar"
 					width={48}
 					height={48}
 					className="rounded-full object-cover w-12 h-12 absolute left-0 right-0 m-auto -bottom-6 ring-1 ring-white z-10"

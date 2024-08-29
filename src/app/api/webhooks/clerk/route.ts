@@ -64,6 +64,7 @@ export async function POST(req: Request) {
 					cover: '/noCover.png',
 				},
 			})
+
 			return new Response('User has been created!', { status: 200 })
 		} catch (err) {
 			console.log(err)
@@ -82,6 +83,7 @@ export async function POST(req: Request) {
 					avatar: JSON.parse(body).data.image_url || '/noAvatar.png',
 				},
 			})
+			
 			return new Response('User has been updated!', { status: 200 })
 		} catch (err) {
 			console.log(err)
