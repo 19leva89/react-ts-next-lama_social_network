@@ -19,7 +19,7 @@ const Post = ({ post }: { post: FeedPostType }) => {
 	const { userId } = auth()
 
 	return (
-		<div className="flex flex-col gap-4">
+		<div className="flex flex-col gap-4 bg-white p-4 rounded-lg">
 			{/* USER */}
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-4">
@@ -28,7 +28,7 @@ const Post = ({ post }: { post: FeedPostType }) => {
 						width={40}
 						height={40}
 						alt="avatar"
-						className="w-10 h-10 rounded-full"
+						className="w-10 h-10 rounded-full transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
 					/>
 
 					<span className="font-medium">

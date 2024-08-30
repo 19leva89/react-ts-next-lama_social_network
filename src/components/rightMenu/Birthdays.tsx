@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Birthdays = () => {
 	return (
@@ -17,14 +17,16 @@ const Birthdays = () => {
 						alt=""
 						width={40}
 						height={40}
-						className="w-10 h-10 rounded-full object-cover"
+						className="w-10 h-10 rounded-full object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
 					/>
 
 					<span className="font-semibold">Wayne Burton</span>
 				</div>
 
 				<div className="flex gap-3 justify-end">
-					<button className="bg-blue-500 text-white text-xs px-2 py-1 rounded-md">Celebrate</button>
+					<button className="bg-blue-500 text-white text-xs px-2 py-1 rounded-md hover:opacity-80 transition-opacity duration-200">
+						Celebrate
+					</button>
 				</div>
 			</div>
 

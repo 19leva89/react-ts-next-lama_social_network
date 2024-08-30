@@ -15,6 +15,10 @@ type StoryWithUser = Story & {
 const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: string }) => {
 	const [storyList, setStoryList] = useState(stories)
 	const [img, setImg] = useState<any>()
+	const [optimisticStories, addOptimisticStory] = useOptimistic(storyList, (state, value: StoryWithUser) => [
+		value,
+		...state,
+	])
 
 	const { user, isLoaded } = useUser()
 
@@ -45,15 +49,16 @@ const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: stri
 
 		try {
 			const createdStory = await addStory(img.secure_url)
-			setStoryList((prev) => [createdStory!, ...prev])
-			setImg(null)
-		} catch (err) {}
-	}
 
-	const [optimisticStories, addOptimisticStory] = useOptimistic(storyList, (state, value: StoryWithUser) => [
-		value,
-		...state,
-	])
+			if (createdStory && 'id' in createdStory) {
+				setStoryList((prev) => [createdStory, ...prev])
+			}
+
+			setImg(null)
+		} catch (err) {
+			console.error('Error while adding story:', err)
+		}
+	}
 
 	return (
 		<>
@@ -66,7 +71,7 @@ const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: stri
 			>
 				{({ open }) => {
 					return (
-						<div className="flex flex-col items-center gap-2 cursor-pointer relative">
+						<div className="flex flex-col items-center gap-2 cursor-pointer relative transition-transform duration-300 ease-in-out hover:scale-110">
 							<Image
 								src={img?.secure_url || user?.imageUrl || '/noAvatar.png'}
 								alt="avatar"

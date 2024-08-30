@@ -46,7 +46,7 @@ const FriendRequestList = ({ requests }: { requests: RequestWithUser[] }) => {
 								alt="avatar"
 								width={40}
 								height={40}
-								className="w-10 h-10 rounded-full object-cover"
+								className="w-10 h-10 rounded-full object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-blue-500/50"
 							/>
 						</Link>
 
@@ -62,13 +62,25 @@ const FriendRequestList = ({ requests }: { requests: RequestWithUser[] }) => {
 					<div className="flex gap-3 justify-end">
 						<form action={() => accept(request.id, request.sender.id)}>
 							<button>
-								<Image src="/accept.png" alt="accept" width={20} height={20} className="cursor-pointer" />
+								<Image
+									src="/accept.png"
+									alt="accept"
+									width={22}
+									height={22}
+									className="border border-transparent cursor-pointer hover:opacity-80 transition-opacity duration-200"
+								/>
 							</button>
 						</form>
 
 						<form action={() => decline(request.id, request.sender.id)}>
 							<button>
-								<Image src="/reject.png" alt="reject" width={20} height={20} className="cursor-pointer" />
+								<Image
+									src="/reject.png"
+									alt="reject"
+									width={22}
+									height={22}
+									className="border border-transparent cursor-pointer opacity-80 hover:opacity-100 transition-opacity duration-200"
+								/>
 							</button>
 						</form>
 					</div>

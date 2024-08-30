@@ -82,14 +82,14 @@ const CommentList = ({ comments, postId }: { comments: CommentWithUser[]; postId
 			<div className="">
 				{/* COMMENT */}
 				{optimisticComments.map((comment) => (
-					<div className="flex gap-4 justify-between mt-6" key={comment.id}>
+					<div className="flex gap-4 justify-between mt-3 p-3 bg-slate-100 rounded-lg" key={comment.id}>
 						{/* AVATAR */}
 						<Image
 							src={comment.user.avatar || 'noAvatar.png'}
 							alt="avatar"
 							width={40}
 							height={40}
-							className="w-10 h-10 rounded-full"
+							className="w-10 h-10 rounded-full transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
 						/>
 
 						{/* DESC */}

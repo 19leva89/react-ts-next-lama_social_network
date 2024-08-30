@@ -48,15 +48,15 @@ const Navbar = () => {
 
 				<ClerkLoaded>
 					<SignedIn>
-						<div className="cursor-pointer">
+						<div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-120">
 							<Image src="/people.png" alt="people" width={24} height={24} />
 						</div>
 
-						<div className="cursor-pointer">
+						<div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-120">
 							<Image src="/messages.png" alt="messages" width={20} height={20} />
 						</div>
 
-						<div className="cursor-pointer">
+						<div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-120">
 							<Image src="/notifications.png" alt="notifications" width={20} height={20} />
 						</div>
 

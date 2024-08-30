@@ -1,7 +1,8 @@
 import prisma from '@/lib/client'
 import { User } from '@prisma/client'
-import Image from 'next/image'
+
 import Link from 'next/link'
+import Image from 'next/image'
 
 const UserMediaCard = async ({ user }: { user: User }) => {
 	const postsWithMedia = await prisma.post.findMany({
@@ -23,7 +24,10 @@ const UserMediaCard = async ({ user }: { user: User }) => {
 			<div className="flex justify-between items-center font-medium">
 				<span className="text-gray-500">User Media</span>
 
-				<Link href="/" className="text-blue-500 text-xs">
+				<Link
+					href="/"
+					className="text-blue-500 text-xs p-1 border border-transparent rounded-md hover:opacity-80 hover:border-blue-500 hover:rounded-md hover:border-opacity-80 transition-all duration-200"
+				>
 					See all
 				</Link>
 			</div>

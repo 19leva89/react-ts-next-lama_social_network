@@ -9,15 +9,16 @@ const PostInfo = ({ postId }: { postId: number }) => {
 	const [open, setOpen] = useState(false)
 
 	const deletePostWithId = deletePost.bind(null, postId)
+
 	return (
 		<div className="relative">
 			<Image
 				src="/more.png"
-				width={16}
-				height={16}
+				width={26}
+				height={26}
 				alt="more"
 				onClick={() => setOpen((prev) => !prev)}
-				className="cursor-pointer"
+				className="cursor-pointer p-1 border border-transparent rounded-md hover:opacity-80 hover:border-gray-600 hover:rounded-md hover:border-opacity-80 transition-all duration-200"
 			/>
 			{open && (
 				<div className="absolute top-4 right-0 bg-white p-4 w-32 rounded-lg flex flex-col gap-2 text-xs shadow-lg z-30">

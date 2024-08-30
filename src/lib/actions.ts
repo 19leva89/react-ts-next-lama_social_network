@@ -1,345 +1,409 @@
-"use server";
+'use server'
 
-import prisma from "./client";
-import { auth } from "@clerk/nextjs/server";
-import { z } from "zod";
-import { revalidatePath } from "next/cache";
+import prisma from './client'
+import { revalidatePath } from 'next/cache'
+import { auth } from '@clerk/nextjs/server'
+import { z } from 'zod'
 
 export const switchFollow = async (userId: string) => {
-  const { userId: currentUserId } = auth();
+	const { userId: currentUserId } = auth()
 
-  if (!currentUserId) {
-    throw new Error("User is not authenticated!");
-  }
+	if (!currentUserId) {
+		throw new Error('User is not authenticated!')
+	}
 
-  try {
-    const existingFollow = await prisma.follower.findFirst({
-      where: {
-        followerId: currentUserId,
-        followingId: userId,
-      },
-    });
+	try {
+		// Checking for a subscription or subscription request
+		const existingFollow = await prisma.follower.findFirst({
+			where: {
+				followerId: currentUserId,
+				followingId: userId,
+			},
+		})
 
-    if (existingFollow) {
-      await prisma.follower.delete({
-        where: {
-          id: existingFollow.id,
-        },
-      });
-    } else {
-      const existingFollowRequest = await prisma.followRequest.findFirst({
-        where: {
-          senderId: currentUserId,
-          receiverId: userId,
-        },
-      });
+		const existingFollowRequest = existingFollow
+			? null
+			: await prisma.followRequest.findFirst({
+					where: {
+						senderId: currentUserId,
+						receiverId: userId,
+					},
+			  })
 
-      if (existingFollowRequest) {
-        await prisma.followRequest.delete({
-          where: {
-            id: existingFollowRequest.id,
-          },
-        });
-      } else {
-        await prisma.followRequest.create({
-          data: {
-            senderId: currentUserId,
-            receiverId: userId,
-          },
-        });
-      }
-    }
-  } catch (err) {
-    console.log(err);
-    throw new Error("Something went wrong!");
-  }
-};
+		if (existingFollow) {
+			// Delete the subscription if it exists
+			await prisma.follower.delete({
+				where: {
+					id: existingFollow.id,
+				},
+			})
+		} else if (existingFollowRequest) {
+			// Delete the subscription request if it exists
+			await prisma.followRequest.delete({
+				where: {
+					id: existingFollowRequest.id,
+				},
+			})
+		} else {
+			// Create a new subscription request if there is no subscription or request
+			await prisma.followRequest.create({
+				data: {
+					senderId: currentUserId,
+					receiverId: userId,
+				},
+			})
+		}
+	} catch (err) {
+		console.error('Error in switchFollow:', err)
+		throw new Error('Something went wrong during follow/unfollow process!')
+	}
+}
 
 export const switchBlock = async (userId: string) => {
-  const { userId: currentUserId } = auth();
+	const { userId: currentUserId } = auth()
 
-  if (!currentUserId) {
-    throw new Error("User is not Authenticated!!");
-  }
+	if (!currentUserId) {
+		throw new Error('User is not authenticated!')
+	}
 
-  try {
-    const existingBlock = await prisma.block.findFirst({
-      where: {
-        blockerId: currentUserId,
-        blockedId: userId,
-      },
-    });
+	try {
+		// Checking if there is a block
+		const existingBlock = await prisma.block.findFirst({
+			where: {
+				blockerId: currentUserId,
+				blockedId: userId,
+			},
+		})
 
-    if (existingBlock) {
-      await prisma.block.delete({
-        where: {
-          id: existingBlock.id,
-        },
-      });
-    } else {
-      await prisma.block.create({
-        data: {
-          blockerId: currentUserId,
-          blockedId: userId,
-        },
-      });
-    }
-  } catch (err) {
-    console.log(err);
-    throw new Error("Something went wrong!");
-  }
-};
+		if (existingBlock) {
+			// Remove the block if it exists
+			await prisma.block.delete({
+				where: {
+					id: existingBlock.id,
+				},
+			})
+		} else {
+			// Create a new block if it doesn't exist
+			await prisma.block.create({
+				data: {
+					blockerId: currentUserId,
+					blockedId: userId,
+				},
+			})
+		}
+	} catch (err) {
+		console.error('Error in switchBlock:', err)
+		throw new Error(`Failed to toggle block status for user with ID ${userId}.`)
+	}
+}
 
 export const acceptFollowRequest = async (userId: string) => {
-  const { userId: currentUserId } = auth();
+	const { userId: currentUserId } = auth()
 
-  if (!currentUserId) {
-    throw new Error("User is not Authenticated!!");
-  }
+	if (!currentUserId) {
+		throw new Error('User is not authenticated!')
+	}
 
-  try {
-    const existingFollowRequest = await prisma.followRequest.findFirst({
-      where: {
-        senderId: userId,
-        receiverId: currentUserId,
-      },
-    });
+	try {
+		// Checking for a subscription request
+		const existingFollowRequest = await prisma.followRequest.findFirst({
+			where: {
+				senderId: userId,
+				receiverId: currentUserId,
+			},
+		})
 
-    if (existingFollowRequest) {
-      await prisma.followRequest.delete({
-        where: {
-          id: existingFollowRequest.id,
-        },
-      });
+		if (!existingFollowRequest) {
+			throw new Error('Follow request does not exist.')
+		}
 
-      await prisma.follower.create({
-        data: {
-          followerId: userId,
-          followingId: currentUserId,
-        },
-      });
-    }
-  } catch (err) {
-    console.log(err);
-    throw new Error("Something went wrong!");
-  }
-};
+		// Use a transaction to delete the request and create a subscription
+		await prisma.$transaction([
+			prisma.followRequest.delete({
+				where: {
+					id: existingFollowRequest.id,
+				},
+			}),
+			prisma.follower.create({
+				data: {
+					followerId: userId,
+					followingId: currentUserId,
+				},
+			}),
+		])
+	} catch (err) {
+		console.error('Error in acceptFollowRequest:', err)
+		throw new Error('Failed to accept follow request.')
+	}
+}
 
 export const declineFollowRequest = async (userId: string) => {
-  const { userId: currentUserId } = auth();
+	const { userId: currentUserId } = auth()
 
-  if (!currentUserId) {
-    throw new Error("User is not Authenticated!!");
-  }
+	if (!currentUserId) {
+		throw new Error('User is not authenticated!')
+	}
 
-  try {
-    const existingFollowRequest = await prisma.followRequest.findFirst({
-      where: {
-        senderId: userId,
-        receiverId: currentUserId,
-      },
-    });
+	try {
+		// Checking for a subscription request
+		const existingFollowRequest = await prisma.followRequest.findFirst({
+			where: {
+				senderId: userId,
+				receiverId: currentUserId,
+			},
+		})
 
-    if (existingFollowRequest) {
-      await prisma.followRequest.delete({
-        where: {
-          id: existingFollowRequest.id,
-        },
-      });
-    }
-  } catch (err) {
-    console.log(err);
-    throw new Error("Something went wrong!");
-  }
-};
+		if (!existingFollowRequest) {
+			console.warn(`No follow request found from user ${userId} to ${currentUserId}.`)
+			return
+		}
+
+		// Removing the subscription request
+		await prisma.followRequest.delete({
+			where: {
+				id: existingFollowRequest.id,
+			},
+		})
+
+		console.log(`Follow request from user ${userId} to ${currentUserId} declined.`)
+	} catch (err) {
+		console.error('Error in declineFollowRequest:', err)
+		throw new Error('Failed to decline follow request.')
+	}
+}
 
 export const updateProfile = async (
-  prevState: { success: boolean; error: boolean },
-  payload: { formData: FormData; cover: string }
+	prevState: { success: boolean; error: boolean },
+	payload: { formData: FormData; cover: string },
 ) => {
-  const { formData, cover } = payload;
-  const fields = Object.fromEntries(formData);
+	const { formData, cover } = payload
+	const fields = Object.fromEntries(formData)
 
-  const filteredFields = Object.fromEntries(
-    Object.entries(fields).filter(([_, value]) => value !== "")
-  );
+	// Filtering empty values
+	const filteredFields = Object.fromEntries(Object.entries(fields).filter(([_, value]) => value !== ''))
 
-  const Profile = z.object({
-    cover: z.string().optional(),
-    name: z.string().max(60).optional(),
-    surname: z.string().max(60).optional(),
-    description: z.string().max(255).optional(),
-    city: z.string().max(60).optional(),
-    school: z.string().max(60).optional(),
-    work: z.string().max(60).optional(),
-    website: z.string().max(60).optional(),
-  });
+	// Profile validation scheme
+	const Profile = z.object({
+		cover: z.string().optional(),
+		name: z.string().max(60).optional(),
+		surname: z.string().max(60).optional(),
+		description: z.string().max(255).optional(),
+		city: z.string().max(60).optional(),
+		school: z.string().max(60).optional(),
+		work: z.string().max(60).optional(),
+		website: z.string().max(60).optional(),
+	})
 
-  const validatedFields = Profile.safeParse({ cover, ...filteredFields });
+	// Checking user authentication
+	const { userId } = auth()
+	if (!userId) {
+		return { success: false, error: true, message: 'User is not authenticated.' }
+	}
 
-  if (!validatedFields.success) {
-    console.log(validatedFields.error.flatten().fieldErrors);
-    return { success: false, error: true };
-  }
+	// Validating profile fields
+	const validatedFields = Profile.safeParse({ cover, ...filteredFields })
+	if (!validatedFields.success) {
+		console.error('Validation errors:', validatedFields.error.flatten().fieldErrors)
+		return {
+			success: false,
+			error: true,
+			message: 'Invalid profile data.',
+			errors: validatedFields.error.flatten().fieldErrors,
+		}
+	}
 
-  const { userId } = auth();
+	try {
+		// Updating user profile
+		await prisma.user.update({
+			where: {
+				id: userId,
+			},
+			data: validatedFields.data,
+		})
 
-  if (!userId) {
-    return { success: false, error: true };
-  }
-
-  try {
-    await prisma.user.update({
-      where: {
-        id: userId,
-      },
-      data: validatedFields.data,
-    });
-    return { success: true, error: false };
-  } catch (err) {
-    console.log(err);
-    return { success: false, error: true };
-  }
-};
+		return { success: true, error: false }
+	} catch (err) {
+		console.error('Error updating profile:', err)
+		return { success: false, error: true, message: 'Failed to update profile.' }
+	}
+}
 
 export const switchLike = async (postId: number) => {
-  const { userId } = auth();
+	const { userId } = auth()
 
-  if (!userId) throw new Error("User is not authenticated!");
+	if (!userId) throw new Error('User is not authenticated!')
 
-  try {
-    const existingLike = await prisma.like.findFirst({
-      where: {
-        postId,
-        userId,
-      },
-    });
+	try {
+		const existingLike = await prisma.like.findFirst({
+			where: {
+				postId,
+				userId,
+			},
+		})
 
-    if (existingLike) {
-      await prisma.like.delete({
-        where: {
-          id: existingLike.id,
-        },
-      });
-    } else {
-      await prisma.like.create({
-        data: {
-          postId,
-          userId,
-        },
-      });
-    }
-  } catch (err) {
-    console.log(err);
-    throw new Error("Something went wrong");
-  }
-};
+		if (existingLike) {
+			await prisma.like.delete({
+				where: {
+					id: existingLike.id,
+				},
+			})
+		} else {
+			await prisma.like.create({
+				data: {
+					postId,
+					userId,
+				},
+			})
+		}
+	} catch (err) {
+		console.error('Error in switchLike:', err)
+		throw new Error('Failed to toggle like status.')
+	}
+}
 
 export const addComment = async (postId: number, desc: string) => {
-  const { userId } = auth();
+	const { userId } = auth()
 
-  if (!userId) throw new Error("User is not authenticated!");
+	if (!userId) throw new Error('User is not authenticated!')
 
-  try {
-    const createdComment = await prisma.comment.create({
-      data: {
-        desc,
-        userId,
-        postId,
-      },
-      include: {
-        user: true,
-      },
-    });
+	// Validation of input data
+	const CommentSchema = z.string().min(1, 'Comment cannot be empty').max(255, 'Comment is too long')
+	const validation = CommentSchema.safeParse(desc)
 
-    return createdComment;
-  } catch (err) {
-    console.log(err);
-    throw new Error("Something went wrong!");
-  }
-};
+	if (!validation.success) {
+		console.error('Validation error:', validation.error.errors)
+		throw new Error('Invalid comment description.')
+	}
+
+	try {
+		// Create a comment
+		const createdComment = await prisma.comment.create({
+			data: {
+				desc: validation.data,
+				userId,
+				postId,
+			},
+			include: {
+				user: true,
+			},
+		})
+
+		return createdComment
+	} catch (err) {
+		console.error('Error creating comment:', err)
+		throw new Error('Failed to create comment.')
+	}
+}
 
 export const addPost = async (formData: FormData, img: string) => {
-  const desc = formData.get("desc") as string;
+	const { userId } = auth()
+	if (!userId) throw new Error('User is not authenticated!')
 
-  const Desc = z.string().min(1).max(255);
+	// Data validation
+	const desc = formData.get('desc') as string
+	const PostSchema = z.string().min(1, 'Post cannot be empty').max(255, 'Post is too long')
+	const validation = PostSchema.safeParse(desc)
 
-  const validatedDesc = Desc.safeParse(desc);
+	if (!validation.success) {
+		console.error('Validation error:', validation.error.errors)
+		throw new Error('Invalid post description.')
+	}
 
-  if (!validatedDesc.success) {
-    // TODO
-    console.log("description is not valid");
-    return;
-  }
-  const { userId } = auth();
+	// Adding a post
+	try {
+		await prisma.post.create({
+			data: {
+				desc: validation.data,
+				userId,
+				img,
+			},
+		})
 
-  if (!userId) throw new Error("User is not authenticated!");
+		// Path revalidation
+		try {
+			await revalidatePath('/')
+		} catch (revalidationError) {
+			console.error('Error during path revalidation:', revalidationError)
+			return { success: true, warning: 'Post added, but path revalidation failed' }
+		}
 
-  try {
-    await prisma.post.create({
-      data: {
-        desc: validatedDesc.data,
-        userId,
-        img,
-      },
-    });
-
-    revalidatePath("/");
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const addStory = async (img: string) => {
-  const { userId } = auth();
-
-  if (!userId) throw new Error("User is not authenticated!");
-
-  try {
-    const existingStory = await prisma.story.findFirst({
-      where: {
-        userId,
-      },
-    });
-
-    if (existingStory) {
-      await prisma.story.delete({
-        where: {
-          id: existingStory.id,
-        },
-      });
-    }
-    const createdStory = await prisma.story.create({
-      data: {
-        userId,
-        img,
-        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
-      },
-      include: {
-        user: true,
-      },
-    });
-
-    return createdStory;
-  } catch (err) {
-    console.log(err);
-  }
-};
+		return { success: true }
+	} catch (err) {
+		console.error('Error adding post:', err)
+		return { success: false, error: 'Failed to add post' }
+	}
+}
 
 export const deletePost = async (postId: number) => {
-  const { userId } = auth();
+	const { userId } = auth()
 
-  if (!userId) throw new Error("User is not authenticated!");
+	if (!userId) throw new Error('User is not authenticated!')
 
-  try {
-    await prisma.post.delete({
-      where: {
-        id: postId,
-        userId,
-      },
-    });
-    revalidatePath("/")
-  } catch (err) {
-    console.log(err);
-  }
-};
+	try {
+		// Checking the existence of the post
+		const existingPost = await prisma.post.findUnique({
+			where: {
+				id: postId,
+			},
+		})
+
+		if (!existingPost) {
+			throw new Error('Post not found!')
+		}
+
+		// Deleting a post
+		await prisma.post.delete({
+			where: {
+				id: postId,
+				userId,
+			},
+		})
+
+		// Path revalidation
+		try {
+			await revalidatePath('/')
+		} catch (revalidationError) {
+			console.error('Error during path revalidation:', revalidationError)
+			return { success: true, warning: 'Post deleted, but path revalidation failed' }
+		}
+
+		return { success: true }
+	} catch (err) {
+		console.error('Error deleting post:', err)
+		return { success: false, error: 'Failed to delete post' }
+	}
+}
+
+export const addStory = async (img: string) => {
+	const { userId } = auth()
+
+	if (!userId) throw new Error('User is not authenticated!')
+
+	try {
+		// Deleting existing history and creating a new one in a transaction
+		const createdStory = await prisma.$transaction(async (prisma) => {
+			//  если не будет работать -> заменить deleteMany на delete
+			await prisma.story.deleteMany({
+				where: {
+					userId,
+				},
+			})
+
+			return await prisma.story.create({
+				data: {
+					userId,
+					img,
+					expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+				},
+				include: {
+					user: true,
+				},
+			})
+		})
+
+		return createdStory
+	} catch (err) {
+		console.error('Error adding story:', err)
+		return { success: false, error: 'Failed to add story' }
+	}
+}

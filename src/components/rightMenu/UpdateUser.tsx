@@ -26,7 +26,10 @@ const UpdateUser = ({ user }: { user: User }) => {
 
 	return (
 		<div className="">
-			<span className="text-blue-500 text-xs cursor-pointer" onClick={() => setOpen(true)}>
+			<span
+				className="text-blue-500 text-xs cursor-pointer p-1 border border-transparent rounded-md hover:opacity-80 hover:border-blue-500 hover:rounded-md hover:border-opacity-80 transition-all duration-200"
+				onClick={() => setOpen(true)}
+			>
 				Update
 			</span>
 
@@ -170,7 +173,10 @@ const UpdateUser = ({ user }: { user: User }) => {
 
 						{state.error && <span className="text-red-500">Something went wrong!</span>}
 
-						<div className="absolute text-xl right-2 top-3 cursor-pointer" onClick={handleClose}>
+						<div
+							className="absolute text-xl right-3 top-3 cursor-pointer p-1 border border-transparent rounded-md hover:opacity-80 hover:border-black hover:rounded-md hover:border-opacity-80 transition-all duration-200"
+							onClick={handleClose}
+						>
 							X
 						</div>
 					</form>

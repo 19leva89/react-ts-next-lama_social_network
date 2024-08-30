@@ -13,6 +13,27 @@ const AddPost = () => {
 	const { user, isLoaded } = useUser()
 	const [desc, setDesc] = useState('')
 	const [img, setImg] = useState<any>()
+	const [error, setError] = useState<string | null>(null)
+
+	const handleSubmit = async (formData: FormData) => {
+		setError(null)
+
+		const result = await addPost(formData, img?.secure_url || '')
+
+		if (!result.success) {
+			setError(result.error || 'An unexpected error occurred')
+
+			if (result.error) {
+				console.log(result.error)
+			}
+
+			if (result.warning) {
+				console.log(result.warning)
+			}
+		} else {
+			setDesc('')
+		}
+	}
 
 	if (!isLoaded) {
 		return 'Loading...'
@@ -32,7 +53,15 @@ const AddPost = () => {
 			{/* POST */}
 			<div className="flex-1">
 				{/* TEXT INPUT */}
-				<form action={(formData) => addPost(formData, img?.secure_url || '')} className="flex gap-4">
+				<form
+					className="flex gap-4"
+					onSubmit={(e) => {
+						e.preventDefault()
+
+						const formData = new FormData(e.target as HTMLFormElement)
+						handleSubmit(formData)
+					}}
+				>
 					<textarea
 						placeholder="What's on your mind?"
 						className="flex-1 bg-slate-100 rounded-lg p-2"
@@ -53,6 +82,8 @@ const AddPost = () => {
 					</div>
 				</form>
 
+				{error && <div className="text-red-500 mt-2">{error}</div>}
+
 				{/* POST OPTIONS */}
 				<div className="flex items-center gap-4 mt-4 text-gray-400 flex-wrap">
 					<CldUploadWidget
@@ -64,7 +95,10 @@ const AddPost = () => {
 					>
 						{({ open }) => {
 							return (
-								<div className="flex items-center gap-2 cursor-pointer" onClick={() => open()}>
+								<div
+									className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
+									onClick={() => open()}
+								>
 									<Image src="/addimage.png" alt="add image" width={20} height={20} />
 									Photo
 								</div>
@@ -72,17 +106,17 @@ const AddPost = () => {
 						}}
 					</CldUploadWidget>
 
-					<div className="flex items-center gap-2 cursor-pointer">
+					<div className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110">
 						<Image src="/addVideo.png" alt="add video" width={20} height={20} />
 						Video
 					</div>
 
-					<div className="flex items-center gap-2 cursor-pointer">
+					<div className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110">
 						<Image src="/poll.png" alt="poll" width={20} height={20} />
 						Poll
 					</div>
 
-					<div className="flex items-center gap-2 cursor-pointer">
+					<div className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110">
 						<Image src="/addevent.png" alt="add event" width={20} height={20} />
 						Event
 					</div>

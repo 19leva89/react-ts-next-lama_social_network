@@ -41,7 +41,9 @@ const Ad = ({ size }: { size: 'sm' | 'md' | 'lg' }) => {
 						: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.  Lorem ipsum dolor sit amet consectetur adipisicing elit.  Lorem ipsum dolor sit amet consectetur adipisicing elit.'}
 				</p>
 
-				<button className="bg-gray-200 text-gray-500 p-2 text-xs rounded-lg">Learn more</button>
+				<button className="bg-gray-300 text-gray-600 p-2 text-xs rounded-lg opacity-80 hover:opacity-100 transition-opacity duration-200">
+					Learn more
+				</button>
 			</div>
 		</div>
 	)
