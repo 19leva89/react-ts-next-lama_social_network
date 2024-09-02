@@ -18,6 +18,13 @@ const Ad = ({ size }: { size: 'sm' | 'md' | 'lg' }) => {
 						alt=""
 						fill
 						className="rounded-lg object-cover"
+						sizes={
+							size === 'sm'
+								? '(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw'
+								: size === 'md'
+								? '(max-width: 768px) 50vw, 25vw'
+								: '100vw'
+						}
 					/>
 				</div>
 
@@ -28,6 +35,13 @@ const Ad = ({ size }: { size: 'sm' | 'md' | 'lg' }) => {
 						width={24}
 						height={24}
 						className="rounded-full w-6 h-6 object-cover"
+						sizes={
+							size === 'sm'
+								? '(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw'
+								: size === 'md'
+								? '(max-width: 768px) 50vw, 25vw'
+								: '100vw'
+						}
 					/>
 
 					<span className="text-blue-500 font-medium">BigChef Lounge</span>

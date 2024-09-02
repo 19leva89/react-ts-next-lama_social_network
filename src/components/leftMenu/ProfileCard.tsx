@@ -27,7 +27,13 @@ const ProfileCard = async () => {
 	return (
 		<div className="p-4 bg-white rounded-lg shadow-md text-sm flex flex-col gap-6">
 			<div className="h-20 relative">
-				<Image src={user.cover || '/noCover.png'} alt="cover" fill className="rounded-md object-cover" />
+				<Image
+					src={user.cover || '/noCover.png'}
+					alt="cover"
+					fill
+					className="rounded-md object-cover"
+					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+				/>
 
 				<Image
 					src={user.avatar || '/noAvatar.png'}
@@ -35,6 +41,7 @@ const ProfileCard = async () => {
 					width={48}
 					height={48}
 					className="rounded-full object-cover w-12 h-12 absolute left-0 right-0 m-auto -bottom-6 ring-1 ring-white z-10"
+					sizes="(max-width: 640px) 10vw, 48px"
 				/>
 			</div>
 
@@ -51,6 +58,7 @@ const ProfileCard = async () => {
 							width={12}
 							height={12}
 							className="rounded-full object-cover w-3 h-3"
+							sizes="(max-width: 640px) 5vw, (max-width: 768px) 3vw, 2vw"
 						/>
 
 						<Image
@@ -59,6 +67,7 @@ const ProfileCard = async () => {
 							width={12}
 							height={12}
 							className="rounded-full object-cover w-3 h-3"
+							sizes="(max-width: 640px) 5vw, (max-width: 768px) 3vw, 2vw"
 						/>
 
 						<Image
@@ -67,6 +76,7 @@ const ProfileCard = async () => {
 							width={12}
 							height={12}
 							className="rounded-full object-cover w-3 h-3"
+							sizes="(max-width: 640px) 5vw, (max-width: 768px) 3vw, 2vw"
 						/>
 					</div>
 

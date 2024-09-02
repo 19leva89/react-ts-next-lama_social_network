@@ -7,6 +7,7 @@ import { addComment } from '@/lib/actions'
 import { Comment, User } from '@prisma/client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 type CommentWithUser = Comment & { user: User }
 
@@ -84,21 +85,26 @@ const CommentList = ({ comments, postId }: { comments: CommentWithUser[]; postId
 				{optimisticComments.map((comment) => (
 					<div className="flex gap-4 justify-between mt-3 p-3 bg-slate-100 rounded-lg" key={comment.id}>
 						{/* AVATAR */}
-						<Image
-							src={comment.user.avatar || 'noAvatar.png'}
-							alt="avatar"
-							width={40}
-							height={40}
-							className="w-10 h-10 rounded-full transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
-						/>
+
+						<Link href={`/profile/${comment.user.username}`}>
+							<Image
+								src={comment.user.avatar || 'noAvatar.png'}
+								alt="avatar"
+								width={40}
+								height={40}
+								className="w-10 h-10 rounded-full transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
+							/>
+						</Link>
 
 						{/* DESC */}
 						<div className="flex flex-col gap-2 flex-1">
-							<span className="font-medium">
-								{comment.user.name && comment.user.surname
-									? comment.user.name + ' ' + comment.user.surname
-									: comment.user.username}
-							</span>
+							<Link href={`/profile/${comment.user.username}`}>
+								<span className="font-medium hover:text-blue-500 opacity-80 hover:opacity-100 transition duration-200">
+									{comment.user.name && comment.user.surname
+										? comment.user.name + ' ' + comment.user.surname
+										: comment.user.username}
+								</span>
+							</Link>
 
 							<p>{comment.desc}</p>
 
@@ -109,7 +115,7 @@ const CommentList = ({ comments, postId }: { comments: CommentWithUser[]; postId
 										alt="like"
 										width={12}
 										height={12}
-										className="cursor-pointer w-4 h-4"
+										className="cursor-pointer w-4 h-4 transition-transform duration-300 ease-in-out hover:scale-125"
 									/>
 
 									<span className="text-gray-300">|</span>

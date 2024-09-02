@@ -62,6 +62,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
 								alt="cover"
 								fill
 								className="rounded-md object-cover"
+								sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 70vw, 50vw"
 							/>
 
 							<Image

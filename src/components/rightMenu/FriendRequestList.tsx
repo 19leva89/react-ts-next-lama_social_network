@@ -15,25 +15,29 @@ type RequestWithUser = FollowRequest & {
 const FriendRequestList = ({ requests }: { requests: RequestWithUser[] }) => {
 	const [requestState, setRequestState] = useState(requests)
 
+	const [optimisticRequests, removeOptimisticRequest] = useOptimistic(requestState, (state, value: number) =>
+		state.filter((req) => req.id !== value),
+	)
+
 	const accept = async (requestId: number, userId: string) => {
 		removeOptimisticRequest(requestId)
+
 		try {
 			await acceptFollowRequest(userId)
+
 			setRequestState((prev) => prev.filter((req) => req.id !== requestId))
 		} catch (err) {}
 	}
 
 	const decline = async (requestId: number, userId: string) => {
 		removeOptimisticRequest(requestId)
+
 		try {
 			await declineFollowRequest(userId)
+
 			setRequestState((prev) => prev.filter((req) => req.id !== requestId))
 		} catch (err) {}
 	}
-
-	const [optimisticRequests, removeOptimisticRequest] = useOptimistic(requestState, (state, value: number) =>
-		state.filter((req) => req.id !== value),
-	)
 
 	return (
 		<div className="">
@@ -51,7 +55,7 @@ const FriendRequestList = ({ requests }: { requests: RequestWithUser[] }) => {
 						</Link>
 
 						<Link href={`/profile/${request.sender.username}`}>
-							<span className="font-semibold">
+							<span className="font-semibold hover:text-blue-500 opacity-80 hover:opacity-100 transition duration-200">
 								{request.sender.name && request.sender.surname
 									? request.sender.name + ' ' + request.sender.surname
 									: request.sender.username}

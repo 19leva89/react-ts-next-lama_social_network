@@ -112,23 +112,28 @@ const UserInfoCard = async ({ user }: { user: User }) => {
 					</div>
 				)}
 
-				<div className="flex items-center justify-between">
-					{user.website && (
-						<div className="flex gap-1 items-center">
-							<Image src="/link.png" alt="link" width={16} height={16} />
+				{user.website && (
+					<div className="flex items-center gap-2">
+						<Image src="/link.png" alt="link" width={16} height={16} />
 
-							<Link href={user.website} className="text-blue-500 font-medium">
-								{user.website}
-							</Link>
-						</div>
-					)}
+						<Link
+							href={user.website}
+							className="text-blue-500 font-medium"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{user.website}
+						</Link>
+					</div>
+				)}
 
-					<div className="flex gap-1 items-center">
+				{user.createdAt && (
+					<div className="flex items-center gap-2">
 						<Image src="/date.png" alt="date" width={16} height={16} />
 
 						<span>Joined {formattedDate}</span>
 					</div>
-				</div>
+				)}
 
 				{currentUserId && currentUserId !== user.id && (
 					<UserInfoCardInteraction

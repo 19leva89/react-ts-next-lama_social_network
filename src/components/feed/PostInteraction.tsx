@@ -50,7 +50,7 @@ const PostInteraction = ({
 								width={16}
 								height={16}
 								alt="liked"
-								className="cursor-pointer"
+								className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125"
 							/>
 						</button>
 					</form>
@@ -64,7 +64,13 @@ const PostInteraction = ({
 				</div>
 
 				<div className="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
-					<Image src="/comment.png" width={16} height={16} alt="comment" className="cursor-pointer" />
+					<Image
+						src="/comment.png"
+						width={16}
+						height={16}
+						alt="comment"
+						className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125"
+					/>
 
 					<span className="text-gray-300">|</span>
 
@@ -77,7 +83,13 @@ const PostInteraction = ({
 
 			<div className="">
 				<div className="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
-					<Image src="/share.png" width={16} height={16} alt="share" className="cursor-pointer" />
+					<Image
+						src="/share.png"
+						width={16}
+						height={16}
+						alt="share"
+						className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125"
+					/>
 
 					<span className="text-gray-300">|</span>
 

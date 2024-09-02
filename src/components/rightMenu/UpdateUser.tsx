@@ -14,18 +14,18 @@ import Image from 'next/image'
 const UpdateUser = ({ user }: { user: User }) => {
 	const [open, setOpen] = useState(false)
 	const [cover, setCover] = useState<any>(false)
-
 	const [state, formAction] = useActionState(updateProfile, { success: false, error: false })
 
 	const router = useRouter()
 
 	const handleClose = () => {
 		setOpen(false)
+
 		state.success && router.refresh()
 	}
 
 	return (
-		<div className="">
+		<div>
 			<span
 				className="text-blue-500 text-xs cursor-pointer p-1 border border-transparent rounded-md hover:opacity-80 hover:border-blue-500 hover:rounded-md hover:border-opacity-80 transition-all duration-200"
 				onClick={() => setOpen(true)}
@@ -47,7 +47,7 @@ const UpdateUser = ({ user }: { user: User }) => {
 						</div>
 
 						{/* COVER PIC UPLOAD */}
-						<CldUploadWidget uploadPreset="social" onSuccess={(result) => setCover(result.info)}>
+						<CldUploadWidget uploadPreset="next-social" onSuccess={(result) => setCover(result.info)}>
 							{({ open }) => {
 								return (
 									<div className="flex flex-col gap-4 my-4" onClick={() => open()}>
@@ -161,7 +161,7 @@ const UpdateUser = ({ user }: { user: User }) => {
 
 								<input
 									type="text"
-									placeholder={user.website || 'sobolev.dev'}
+									placeholder={user.website || 'website.dev'}
 									className="ring-1 ring-gray-300 p-[13px] rounded-md text-sm"
 									name="website"
 								/>
@@ -169,6 +169,7 @@ const UpdateUser = ({ user }: { user: User }) => {
 						</div>
 
 						<UpdateButton />
+
 						{state.success && <span className="text-green-500">Profile has been updated!</span>}
 
 						{state.error && <span className="text-red-500">Something went wrong!</span>}

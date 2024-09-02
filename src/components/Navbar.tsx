@@ -18,17 +18,26 @@ const Navbar = () => {
 			<div className="hidden md:flex w-[50%] text-sm items-center justify-between">
 				{/* LINKS */}
 				<div className="flex gap-6 text-gray-600">
-					<Link href="/" className="flex items-center gap-2">
+					<Link
+						href="/"
+						className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
+					>
 						<Image src="/home.png" alt="home page" width={16} height={16} className="w-4 h-4" />
 						<span>Homepage</span>
 					</Link>
 
-					<Link href="/" className="flex items-center gap-2">
+					<Link
+						href="/"
+						className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
+					>
 						<Image src="/friends.png" alt="friends" width={16} height={16} className="w-4 h-4" />
 						<span>Friends</span>
 					</Link>
 
-					<Link href="/" className="flex items-center gap-2">
+					<Link
+						href="/"
+						className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
+					>
 						<Image src="/stories.png" alt="stories" width={16} height={16} className="w-4 h-4" />
 						<span>Stories</span>
 					</Link>
@@ -36,7 +45,13 @@ const Navbar = () => {
 
 				<div className="hidden xl:flex p-2 bg-slate-100 items-center rounded-xl">
 					<input type="text" placeholder="search..." className="bg-transparent outline-none" />
-					<Image src="/search.png" alt="search" width={14} height={14} />
+					<Image
+						src="/search.png"
+						alt="search"
+						width={14}
+						height={14}
+						className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125"
+					/>
 				</div>
 			</div>
 
@@ -48,15 +63,15 @@ const Navbar = () => {
 
 				<ClerkLoaded>
 					<SignedIn>
-						<div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-120">
+						<div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125">
 							<Image src="/people.png" alt="people" width={24} height={24} />
 						</div>
 
-						<div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-120">
+						<div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125">
 							<Image src="/messages.png" alt="messages" width={20} height={20} />
 						</div>
 
-						<div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-120">
+						<div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125">
 							<Image src="/notifications.png" alt="notifications" width={20} height={20} />
 						</div>
 

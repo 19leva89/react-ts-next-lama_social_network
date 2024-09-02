@@ -63,7 +63,7 @@ const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: stri
 	return (
 		<>
 			<CldUploadWidget
-				uploadPreset="social"
+				uploadPreset="next-social"
 				onSuccess={(result, { widget }) => {
 					setImg(result.info)
 					widget.close()
