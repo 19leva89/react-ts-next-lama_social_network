@@ -63,15 +63,16 @@ const CommentList = ({ comments }: { comments: FeedCommentType[] }) => {
 
 	return (
 		<div>
-			{comments.map((comment) => {
-				const likeInfo = optimisticLike.find((like) => like.id === comment.id)
+			{/* COMMENT */}
+			{comments.map(({ id, user, desc }) => {
+				const likeInfo = optimisticLike.find((like) => like.id === id)
 
 				return (
-					<div className="flex gap-4 justify-between mt-3 p-3 bg-slate-100 rounded-lg" key={comment.id}>
+					<div className="flex gap-4 justify-between mt-3 p-3 bg-slate-100 rounded-lg" key={id}>
 						{/* AVATAR */}
-						<Link href={`/profile/${comment.user.username}`}>
+						<Link href={`/profile/${user.username}`}>
 							<Image
-								src={comment.user.avatar || 'noAvatar.png'}
+								src={user.avatar || 'noAvatar.png'}
 								alt="avatar"
 								width={40}
 								height={40}
@@ -81,19 +82,17 @@ const CommentList = ({ comments }: { comments: FeedCommentType[] }) => {
 
 						{/* DESC */}
 						<div className="flex flex-col gap-2 flex-1">
-							<Link href={`/profile/${comment.user.username}`}>
+							<Link href={`/profile/${user.username}`}>
 								<span className="font-medium hover:text-blue-500 opacity-80 hover:opacity-100 transition duration-200">
-									{comment.user.name && comment.user.surname
-										? `${comment.user.name} ${comment.user.surname}`
-										: comment.user.username}
+									{user.name && user.surname ? `${user.name} ${user.surname}` : user.username}
 								</span>
 							</Link>
 
-							<p>{comment.desc}</p>
+							<p>{desc}</p>
 
 							<div className="flex items-center gap-8 text-xs text-gray-500 mt-2">
 								<div className="flex items-center gap-4">
-									<form action={() => likeAction(comment.id)}>
+									<form action={() => likeAction(id)}>
 										<button>
 											<Image
 												src={likeInfo?.isLiked ? '/liked.png' : '/like.png'}

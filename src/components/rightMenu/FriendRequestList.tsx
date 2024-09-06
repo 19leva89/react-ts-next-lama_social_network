@@ -41,12 +41,12 @@ const FriendRequestList = ({ requests }: { requests: RequestWithUser[] }) => {
 
 	return (
 		<div>
-			{optimisticRequests.map((request) => (
-				<div className="flex items-center justify-between" key={request.id}>
+			{optimisticRequests.map(({ id, sender }) => (
+				<div className="flex items-center justify-between" key={id}>
 					<div className="flex items-center gap-4">
-						<Link href={`/profile/${request.sender.username}`}>
+						<Link href={`/profile/${sender.username}`}>
 							<Image
-								src={request.sender.avatar || '/noAvatar.png'}
+								src={sender.avatar || '/noAvatar.png'}
 								alt="avatar"
 								width={40}
 								height={40}
@@ -54,17 +54,15 @@ const FriendRequestList = ({ requests }: { requests: RequestWithUser[] }) => {
 							/>
 						</Link>
 
-						<Link href={`/profile/${request.sender.username}`}>
+						<Link href={`/profile/${sender.username}`}>
 							<span className="font-semibold hover:text-blue-500 opacity-80 hover:opacity-100 transition duration-200">
-								{request.sender.name && request.sender.surname
-									? request.sender.name + ' ' + request.sender.surname
-									: request.sender.username}
+								{sender.name && sender.surname ? sender.name + ' ' + sender.surname : sender.username}
 							</span>
 						</Link>
 					</div>
 
 					<div className="flex gap-3 justify-end">
-						<form action={() => accept(request.id, request.sender.id)}>
+						<form action={() => accept(id, sender.id)}>
 							<button>
 								<Image
 									src="/accept.png"
@@ -76,7 +74,7 @@ const FriendRequestList = ({ requests }: { requests: RequestWithUser[] }) => {
 							</button>
 						</form>
 
-						<form action={() => decline(request.id, request.sender.id)}>
+						<form action={() => decline(id, sender.id)}>
 							<button>
 								<Image
 									src="/reject.png"

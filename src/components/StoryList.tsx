@@ -95,17 +95,17 @@ const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: stri
 			</CldUploadWidget>
 
 			{/* STORY */}
-			{optimisticStories.map((story) => (
-				<div className="flex flex-col items-center gap-2 cursor-pointer" key={story.id}>
+			{optimisticStories.map(({ id, user }) => (
+				<div className="flex flex-col items-center gap-2 cursor-pointer" key={id}>
 					<Image
-						src={story.user.avatar || '/noAvatar.png'}
+						src={user.avatar || '/noAvatar.png'}
 						alt="avatar"
 						width={80}
 						height={80}
 						className="w-20 h-20 rounded-full ring-2"
 					/>
 
-					<span className="font-medium">{story.user.name || story.user.username}</span>
+					<span className="font-medium">{user.name || user.username}</span>
 				</div>
 			))}
 		</>
