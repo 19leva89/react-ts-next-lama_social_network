@@ -33,6 +33,9 @@ const AddPost = () => {
 		} else {
 			setDesc('')
 		}
+
+		setDesc('')
+		setImg('')
 	}
 
 	if (!isLoaded) {
@@ -52,6 +55,18 @@ const AddPost = () => {
 
 			{/* POST */}
 			<div className="flex-1">
+				{img?.secure_url && (
+					<div className="w-full min-h-96 relative mb-4">
+						<Image
+							src={img.secure_url}
+							fill
+							className="object-cover rounded-md"
+							alt="post img"
+							sizes="(max-width: 640px) 100vw, (max-width: 768px) 75vw, 50vw"
+						/>
+					</div>
+				)}
+
 				{/* TEXT INPUT */}
 				<form
 					className="flex gap-4"
@@ -66,10 +81,11 @@ const AddPost = () => {
 						placeholder="What's on your mind?"
 						className="flex-1 bg-slate-100 rounded-lg p-2"
 						name="desc"
+						value={desc}
 						onChange={(e) => setDesc(e.target.value)}
-					></textarea>
+					/>
 
-					<div className="">
+					<div>
 						<Image
 							src="/emoji.png"
 							alt="emoji"

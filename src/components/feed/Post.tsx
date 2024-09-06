@@ -7,8 +7,8 @@ import Comments from './Comments'
 import PostInfo from './PostInfo'
 import PostInteraction from './PostInteraction'
 
-import Image from 'next/image'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type FeedPostType = PostType & { user: User } & {
 	likes: [{ userId: string }]
@@ -67,6 +67,7 @@ const Post = ({ post }: { post: FeedPostType }) => {
 			<Suspense fallback="Loading...">
 				<PostInteraction
 					postId={post.id}
+					userId={post.user.id}
 					likes={post.likes.map((like) => like.userId)}
 					commentNumber={post._count.comments}
 				/>

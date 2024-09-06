@@ -40,7 +40,7 @@ const FriendRequestList = ({ requests }: { requests: RequestWithUser[] }) => {
 	}
 
 	return (
-		<div className="">
+		<div>
 			{optimisticRequests.map((request) => (
 				<div className="flex items-center justify-between" key={request.id}>
 					<div className="flex items-center gap-4">

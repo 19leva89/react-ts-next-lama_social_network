@@ -228,7 +228,7 @@ export const updateProfile = async (
 	}
 }
 
-export const switchLike = async (postId: number) => {
+export const switchLikeForPost = async (postId: number) => {
 	const { userId } = auth()
 
 	if (!userId) throw new Error('User is not authenticated!')
@@ -256,7 +256,40 @@ export const switchLike = async (postId: number) => {
 			})
 		}
 	} catch (err) {
-		console.error('Error in switchLike:', err)
+		console.error('Error in switchLikeForPost:', err)
+		throw new Error('Failed to toggle like status.')
+	}
+}
+
+export const switchLikeForComment = async (commentId: number) => {
+	const { userId } = auth()
+
+	if (!userId) throw new Error('User is not authenticated!')
+
+	try {
+		const existingLike = await prisma.like.findFirst({
+			where: {
+				commentId,
+				userId,
+			},
+		})
+
+		if (existingLike) {
+			await prisma.like.delete({
+				where: {
+					id: existingLike.id,
+				},
+			})
+		} else {
+			await prisma.like.create({
+				data: {
+					commentId,
+					userId,
+				},
+			})
+		}
+	} catch (err) {
+		console.error('Error in switchLikeForComment:', err)
 		throw new Error('Failed to toggle like status.')
 	}
 }
@@ -285,6 +318,7 @@ export const addComment = async (postId: number, desc: string) => {
 			},
 			include: {
 				user: true,
+				likes: true,
 			},
 		})
 

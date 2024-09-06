@@ -1,6 +1,13 @@
 import prisma from '@/lib/client'
+import { Comment as CommentType, User } from '@prisma/client'
 
-import CommentList from './CommentList'
+import AddComment from '../AddComment'
+
+export type FeedCommentType = CommentType & {
+	user: User
+} & {
+	likes: { userId: string }[]
+}
 
 const Comments = async ({ postId }: { postId: number }) => {
 	const comments = await prisma.comment.findMany({
@@ -9,13 +16,17 @@ const Comments = async ({ postId }: { postId: number }) => {
 		},
 		include: {
 			user: true,
+			likes: {
+				select: {
+					userId: true,
+				},
+			},
 		},
 	})
 
 	return (
-		<div className="">
-			{/* WRITE */}
-			<CommentList comments={comments} postId={postId} />
+		<div>
+			<AddComment postId={postId} comments={comments} />
 		</div>
 	)
 }
