@@ -329,6 +329,49 @@ export const addComment = async (postId: number, desc: string) => {
 	}
 }
 
+export const deleteComment = async (commentId: number) => {
+	const { userId } = auth()
+
+	if (!userId) throw new Error('User is not authenticated!')
+
+	try {
+		// Checking the existence of the post
+		const existingComment = await prisma.comment.findUnique({
+			where: {
+				id: commentId,
+			},
+		})
+
+		if (!existingComment) {
+			throw new Error('Comment not found!')
+		}
+
+		if (existingComment.userId !== userId) {
+			throw new Error('You are not authorized to delete this comment!')
+		}
+
+		// Deleting a comment
+		await prisma.comment.delete({
+			where: {
+				id: commentId,
+			},
+		})
+
+		// Path revalidation
+		try {
+			await revalidatePath('/')
+		} catch (revalidationError) {
+			console.error('Error during path revalidation:', revalidationError)
+			return { success: true, warning: 'Comment deleted, but path revalidation failed' }
+		}
+
+		return { success: true }
+	} catch (err) {
+		console.error('Error deleting comment:', err)
+		return { success: false, error: 'Failed to delete comment' }
+	}
+}
+
 export const addPost = async (formData: FormData, img: string) => {
 	const { userId } = auth()
 	if (!userId) throw new Error('User is not authenticated!')
