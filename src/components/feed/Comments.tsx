@@ -1,7 +1,7 @@
 import prisma from '@/lib/client'
 import { Comment as CommentType, User } from '@prisma/client'
 
-import AddComment from '../AddComment'
+import CommentList from './CommentList'
 
 export type FeedCommentType = CommentType & {
 	user: User
@@ -26,7 +26,7 @@ const Comments = async ({ postId }: { postId: number }) => {
 
 	return (
 		<div>
-			<AddComment postId={postId} comments={comments} />
+			<CommentList postId={postId} comments={comments} />
 		</div>
 	)
 }

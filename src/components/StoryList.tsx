@@ -12,15 +12,19 @@ type StoryWithUser = Story & {
 	user: User
 }
 
-const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: string }) => {
+type StoryListProps = {
+	stories: StoryWithUser[]
+	userId: string
+}
+
+const StoryList = ({ stories, userId }: StoryListProps) => {
+	const { isLoaded, user } = useUser()
 	const [storyList, setStoryList] = useState(stories)
 	const [img, setImg] = useState<any>()
 	const [optimisticStories, addOptimisticStory] = useOptimistic(storyList, (state, value: StoryWithUser) => [
 		value,
 		...state,
 	])
-
-	const { user, isLoaded } = useUser()
 
 	const add = async () => {
 		if (!img?.secure_url) return
@@ -60,6 +64,9 @@ const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: stri
 		}
 	}
 
+	if (!user && !isLoaded) return 'Loading...'
+	if (!user && isLoaded) return null
+
 	return (
 		<>
 			<CldUploadWidget
@@ -83,12 +90,19 @@ const StoryList = ({ stories, userId }: { stories: StoryWithUser[]; userId: stri
 
 							{img ? (
 								<form action={add}>
-									<button className="text-xs bg-blue-500 p-1 rounded-md text-white">Send</button>
+									<button className="text-xs bg-blue-500 p-1 rounded-md text-white disabled:bg-blue-300 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-200">
+										Send
+									</button>
 								</form>
 							) : (
-								<span className="font-medium">Add a Story</span>
+								<span onClick={() => open()} className="font-medium">
+									Add a Story
+								</span>
 							)}
-							<div className="absolute text-6xl text-gray-200 top-1">+</div>
+
+							<div onClick={() => open()} className="absolute text-6xl text-gray-200 top-1">
+								+
+							</div>
 						</div>
 					)
 				}}

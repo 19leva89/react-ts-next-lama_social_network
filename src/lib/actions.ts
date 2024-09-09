@@ -458,7 +458,7 @@ export const addStory = async (img: string) => {
 
 	try {
 		// Deleting existing history and creating a new one in a transaction
-		const createdStory = await prisma.$transaction(async (prisma) => {
+		const existingStory = await prisma.$transaction(async (prisma) => {
 			//  если не будет работать -> заменить deleteMany на delete
 			await prisma.story.deleteMany({
 				where: {
@@ -478,7 +478,7 @@ export const addStory = async (img: string) => {
 			})
 		})
 
-		return createdStory
+		return existingStory
 	} catch (err) {
 		console.error('Error adding story:', err)
 		return { success: false, error: 'Failed to add story' }

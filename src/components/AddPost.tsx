@@ -10,7 +10,7 @@ import AddPostButton from './AddPostButton'
 import Image from 'next/image'
 
 const AddPost = () => {
-	const { user, isLoaded } = useUser()
+	const { isLoaded, user } = useUser()
 	const [desc, setDesc] = useState('')
 	const [img, setImg] = useState<any>()
 	const [error, setError] = useState<string | null>(null)
