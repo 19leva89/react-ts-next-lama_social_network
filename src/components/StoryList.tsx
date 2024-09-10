@@ -7,6 +7,7 @@ import { useUser } from '@clerk/nextjs'
 import { CldUploadWidget } from 'next-cloudinary'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 type StoryWithUser = Story & {
 	user: User
@@ -27,7 +28,7 @@ const StoryList = ({ stories, userId }: StoryListProps) => {
 	])
 
 	const add = async () => {
-		if (!img?.secure_url) return
+		if (!img.secure_url) return
 
 		addOptimisticStory({
 			id: Math.random(),
@@ -85,6 +86,7 @@ const StoryList = ({ stories, userId }: StoryListProps) => {
 								width={80}
 								height={80}
 								className="w-20 h-20 rounded-full ring-2 object-cover"
+								loading="lazy"
 								onClick={() => open()}
 							/>
 
@@ -109,18 +111,21 @@ const StoryList = ({ stories, userId }: StoryListProps) => {
 			</CldUploadWidget>
 
 			{/* STORY */}
-			{optimisticStories.map(({ id, user }) => (
-				<div className="flex flex-col items-center gap-2 cursor-pointer" key={id}>
-					<Image
-						src={user.avatar || '/noAvatar.png'}
-						alt="avatar"
-						width={80}
-						height={80}
-						className="w-20 h-20 rounded-full ring-2"
-					/>
+			{optimisticStories.map(({ id, user, img }) => (
+				<Link href={'/'} key={id}>
+					<div className="flex flex-col items-center gap-2 cursor-pointer relative transition-transform duration-300 ease-in-out hover:scale-110">
+						<Image
+							src={img}
+							alt="avatar"
+							width={80}
+							height={80}
+							className="w-20 h-20 rounded-full ring-2"
+							loading="lazy"
+						/>
 
-					<span className="font-medium">{user.name || user.username}</span>
-				</div>
+						<span className="font-medium">{user.name || user.username}</span>
+					</div>
+				</Link>
 			))}
 		</>
 	)

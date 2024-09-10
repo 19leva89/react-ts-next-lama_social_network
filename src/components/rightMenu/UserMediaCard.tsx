@@ -34,18 +34,21 @@ const UserMediaCard = async ({ user }: { user: User }) => {
 
 			{/* BOTTOM */}
 			<div className="flex gap-4 justify-between flex-wrap">
-				{postsWithMedia.length
-					? postsWithMedia.map(({ id, img }) => (
-							<div className="relative w-1/5 h-24" key={id}>
-								<Image
-									src={img!}
-									alt="post img"
-									fill
-									className="object-cover rounded-md"
-									sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-								/>
-							</div>
-					  ))
+				{postsWithMedia.length > 0
+					? postsWithMedia
+							.filter(({ img }) => img)
+							.map(({ id, img }) => (
+								<div className="relative w-1/5 h-24" key={id}>
+									<Image
+										src={img!}
+										alt="post img"
+										fill
+										className="object-cover rounded-md"
+										sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+										loading="lazy"
+									/>
+								</div>
+							))
 					: 'No media found!'}
 			</div>
 		</div>

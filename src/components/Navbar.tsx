@@ -22,7 +22,14 @@ const Navbar = () => {
 						href="/"
 						className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
 					>
-						<Image src="/home.png" alt="home page" width={16} height={16} className="w-4 h-4" />
+						<Image
+							src="/home.png"
+							alt="home page"
+							width={16}
+							height={16}
+							className="w-4 h-4"
+							loading="lazy"
+						/>
 						<span>Homepage</span>
 					</Link>
 
@@ -30,7 +37,14 @@ const Navbar = () => {
 						href="/"
 						className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
 					>
-						<Image src="/friends.png" alt="friends" width={16} height={16} className="w-4 h-4" />
+						<Image
+							src="/friends.png"
+							alt="friends"
+							width={16}
+							height={16}
+							className="w-4 h-4"
+							loading="lazy"
+						/>
 						<span>Friends</span>
 					</Link>
 
@@ -38,7 +52,14 @@ const Navbar = () => {
 						href="/"
 						className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
 					>
-						<Image src="/stories.png" alt="stories" width={16} height={16} className="w-4 h-4" />
+						<Image
+							src="/stories.png"
+							alt="stories"
+							width={16}
+							height={16}
+							className="w-4 h-4"
+							loading="lazy"
+						/>
 						<span>Stories</span>
 					</Link>
 				</div>
@@ -51,6 +72,7 @@ const Navbar = () => {
 						width={14}
 						height={14}
 						className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125"
+						loading="lazy"
 					/>
 				</div>
 			</div>
@@ -64,15 +86,15 @@ const Navbar = () => {
 				<ClerkLoaded>
 					<SignedIn>
 						<div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125">
-							<Image src="/people.png" alt="people" width={24} height={24} />
+							<Image src="/people.png" alt="people" width={24} height={24} loading="lazy" />
 						</div>
 
 						<div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125">
-							<Image src="/messages.png" alt="messages" width={20} height={20} />
+							<Image src="/messages.png" alt="messages" width={20} height={20} loading="lazy" />
 						</div>
 
 						<div className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125">
-							<Image src="/notifications.png" alt="notifications" width={20} height={20} />
+							<Image src="/notifications.png" alt="notifications" width={20} height={20} loading="lazy" />
 						</div>
 
 						<UserButton />
@@ -81,7 +103,7 @@ const Navbar = () => {
 					<SignedOut>
 						<div className="flex items-center gap-2 text-sm">
 							<Link href="/sign-in">
-								<Image src="/login.png" alt="login" width={20} height={20} />
+								<Image src="/login.png" alt="login" width={20} height={20} loading="lazy" />
 							</Link>
 
 							<Link href="/sign-in">Login/Register</Link>

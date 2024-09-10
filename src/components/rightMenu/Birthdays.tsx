@@ -13,11 +13,12 @@ const Birthdays = () => {
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-4">
 					<Image
-						src="https://images.pexels.com/photos/18207381/pexels-photo-18207381/free-photo-of-window-in-bar.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load"
+						src="https://images.pexels.com/photos/18207381/pexels-photo-18207381/free-photo-of-window-in-bar.jpeg?auto=compress&cs=tinysrgb&w=800"
 						alt=""
 						width={40}
 						height={40}
 						className="w-10 h-10 rounded-full object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
+						loading="lazy"
 					/>
 
 					<span className="font-semibold">Wayne Burton</span>
@@ -32,7 +33,7 @@ const Birthdays = () => {
 
 			{/* UPCOMING */}
 			<div className="p-4 bg-slate-100 rounded-lg flex items-center gap-4">
-				<Image src="/gift.png" alt="gift" width={24} height={24} />
+				<Image src="/gift.png" alt="gift" width={24} height={24} loading="lazy" />
 
 				<Link href="/" className="flex flex-col gap-1 text-xs">
 					<span className="text-gray-700 font-semibold">Upcoming Birthdays</span>

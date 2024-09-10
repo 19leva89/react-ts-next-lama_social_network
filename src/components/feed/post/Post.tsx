@@ -3,9 +3,9 @@ import { Suspense } from 'react'
 import { Post as PostType, User } from '@prisma/client'
 import { auth } from '@clerk/nextjs/server'
 
-import Comments from './Comments'
+import Comments from '../comments/Comments'
 import PostInfo from './PostInfo'
-import PostInteraction from './PostInteraction'
+import PostActions from './PostActions'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -31,6 +31,7 @@ const Post = ({ post }: { post: FeedPostType }) => {
 							height={40}
 							alt="avatar"
 							className="w-10 h-10 rounded-full transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
+							loading="lazy"
 						/>
 					</Link>
 
@@ -56,6 +57,7 @@ const Post = ({ post }: { post: FeedPostType }) => {
 							className="object-cover rounded-md"
 							alt="post img"
 							sizes="(max-width: 640px) 100vw, (max-width: 768px) 75vw, 50vw"
+							loading="lazy"
 						/>
 					</div>
 				)}
@@ -63,9 +65,9 @@ const Post = ({ post }: { post: FeedPostType }) => {
 				<p>{post.desc}</p>
 			</div>
 
-			{/* INTERACTION */}
+			{/* ACTIONS */}
 			<Suspense fallback="Loading...">
-				<PostInteraction
+				<PostActions
 					postId={post.id}
 					userId={post.user.id}
 					likes={post.likes.map((like) => like.userId)}

@@ -51,6 +51,7 @@ const AddPost = () => {
 				width={48}
 				height={48}
 				className="w-12 h-12 object-cover rounded-full"
+				loading="lazy"
 			/>
 
 			{/* POST */}
@@ -63,6 +64,7 @@ const AddPost = () => {
 							className="object-cover rounded-md"
 							alt="post img"
 							sizes="(max-width: 640px) 100vw, (max-width: 768px) 75vw, 50vw"
+							loading="lazy"
 						/>
 					</div>
 				)}
@@ -92,6 +94,7 @@ const AddPost = () => {
 							width={20}
 							height={20}
 							className="w-5 h-5 cursor-pointer self-end"
+							loading="lazy"
 						/>
 
 						<AddPostButton />
@@ -115,7 +118,7 @@ const AddPost = () => {
 									className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
 									onClick={() => open()}
 								>
-									<Image src="/addimage.png" alt="add image" width={20} height={20} />
+									<Image src="/addimage.png" alt="add image" width={20} height={20} loading="lazy" />
 									Photo
 								</div>
 							)
@@ -123,17 +126,17 @@ const AddPost = () => {
 					</CldUploadWidget>
 
 					<div className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110">
-						<Image src="/addVideo.png" alt="add video" width={20} height={20} />
+						<Image src="/addVideo.png" alt="add video" width={20} height={20} loading="lazy" />
 						Video
 					</div>
 
 					<div className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110">
-						<Image src="/poll.png" alt="poll" width={20} height={20} />
+						<Image src="/poll.png" alt="poll" width={20} height={20} loading="lazy" />
 						Poll
 					</div>
 
 					<div className="flex items-center gap-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110">
-						<Image src="/addevent.png" alt="add event" width={20} height={20} />
+						<Image src="/addevent.png" alt="add event" width={20} height={20} loading="lazy" />
 						Event
 					</div>
 				</div>

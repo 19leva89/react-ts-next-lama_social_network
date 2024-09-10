@@ -3,7 +3,7 @@
 import { FC, useOptimistic, useState } from 'react'
 import { switchBlock, switchFollow } from '@/lib/actions'
 
-type UserInfoCardInteractionProps = {
+type UserInfoCardActionsProps = {
 	userId: string
 	isUserBlocked: boolean
 	isFollowing: boolean
@@ -16,7 +16,7 @@ type UserState = {
 	followingRequestSent: boolean
 }
 
-const UserInfoCardInteraction: FC<UserInfoCardInteractionProps> = ({
+const UserInfoCardActions: FC<UserInfoCardActionsProps> = ({
 	userId,
 	isUserBlocked,
 	isFollowing,
@@ -108,4 +108,4 @@ const UserInfoCardInteraction: FC<UserInfoCardInteractionProps> = ({
 	)
 }
 
-export default UserInfoCardInteraction
+export default UserInfoCardActions

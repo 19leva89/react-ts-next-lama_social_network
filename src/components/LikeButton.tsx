@@ -15,6 +15,7 @@ const LikeButton = ({ isLiked = false, likeAction }: LikeButtonProps) => {
 					width={16}
 					height={16}
 					className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125"
+					loading="lazy"
 				/>
 			</button>
 		</form>

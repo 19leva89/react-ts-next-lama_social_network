@@ -60,6 +60,7 @@ const UpdateUser = ({ user }: { user: User }) => {
 												width={48}
 												height={32}
 												className="w-12 h-8 rounded-md object-cover"
+												loading="lazy"
 											/>
 											<span className="text-xs underline text-gray-600">Change</span>
 										</div>

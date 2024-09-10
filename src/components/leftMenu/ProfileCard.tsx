@@ -19,6 +19,16 @@ const ProfileCard = async () => {
 					followers: true,
 				},
 			},
+			followers: {
+				include: {
+					following: {
+						select: {
+							avatar: true,
+							username: true,
+						},
+					},
+				},
+			},
 		},
 	})
 
@@ -33,6 +43,7 @@ const ProfileCard = async () => {
 					fill
 					className="rounded-md object-cover"
 					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+					loading="lazy"
 				/>
 
 				<Image
@@ -42,6 +53,7 @@ const ProfileCard = async () => {
 					height={48}
 					className="rounded-full object-cover w-12 h-12 absolute left-0 right-0 m-auto -bottom-6 ring-1 ring-white z-10"
 					sizes="(max-width: 640px) 10vw, 48px"
+					loading="lazy"
 				/>
 			</div>
 
@@ -51,34 +63,22 @@ const ProfileCard = async () => {
 				</span>
 
 				<div className="flex items-center gap-4">
-					<div className="flex">
-						<Image
-							src="https://images.pexels.com/photos/19578755/pexels-photo-19578755/free-photo-of-woman-watching-birds-and-landscape.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load"
-							alt=""
-							width={12}
-							height={12}
-							className="rounded-full object-cover w-3 h-3"
-							sizes="(max-width: 640px) 5vw, (max-width: 768px) 3vw, 2vw"
-						/>
-
-						<Image
-							src="https://images.pexels.com/photos/19578755/pexels-photo-19578755/free-photo-of-woman-watching-birds-and-landscape.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load"
-							alt=""
-							width={12}
-							height={12}
-							className="rounded-full object-cover w-3 h-3"
-							sizes="(max-width: 640px) 5vw, (max-width: 768px) 3vw, 2vw"
-						/>
-
-						<Image
-							src="https://images.pexels.com/photos/19578755/pexels-photo-19578755/free-photo-of-woman-watching-birds-and-landscape.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load"
-							alt=""
-							width={12}
-							height={12}
-							className="rounded-full object-cover w-3 h-3"
-							sizes="(max-width: 640px) 5vw, (max-width: 768px) 3vw, 2vw"
-						/>
-					</div>
+					{user.followers && user.followers.length > 0 && (
+						<div className="flex">
+							{user.followers.slice(0, 3).map(({ following }) => (
+								<Image
+									key={following.username}
+									src={following.avatar || '/noAvatar.png'}
+									alt={following.username}
+									width={12}
+									height={12}
+									className="rounded-full object-cover w-3 h-3"
+									sizes="(max-width: 640px) 5vw, (max-width: 768px) 3vw, 2vw"
+									loading="lazy"
+								/>
+							))}
+						</div>
+					)}
 
 					<span className="text-xs text-gray-500">{user._count.followers} Followers</span>
 				</div>

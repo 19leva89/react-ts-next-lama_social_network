@@ -63,6 +63,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
 								fill
 								className="rounded-md object-cover"
 								sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 70vw, 50vw"
+								loading="lazy"
 							/>
 
 							<Image
@@ -71,6 +72,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
 								width={128}
 								height={128}
 								className="w-32 h-32 rounded-full absolute left-0 right-0 m-auto -bottom-16 ring-4 ring-white object-cover"
+								loading="lazy"
 							/>
 						</div>
 

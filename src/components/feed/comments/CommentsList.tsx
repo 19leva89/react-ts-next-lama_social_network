@@ -6,7 +6,7 @@ import { useAuth, useUser } from '@clerk/nextjs'
 import { addComment, deleteComment, switchLikeForComment } from '@/lib/actions'
 
 import { FeedCommentType } from './Comments'
-import LikeButton from '../LikeButton'
+import LikeButton from '../../LikeButton'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -17,7 +17,7 @@ type CommentListProps = {
 	comments: FeedCommentType[]
 }
 
-const CommentList = ({ postId, comments }: CommentListProps) => {
+const CommentsList = ({ postId, comments }: CommentListProps) => {
 	const { user } = useUser()
 	const { isLoaded, userId } = useAuth()
 	const [desc, setDesc] = useState('')
@@ -143,6 +143,7 @@ const CommentList = ({ postId, comments }: CommentListProps) => {
 					width={32}
 					height={32}
 					className="w-8 h-8 rounded-full"
+					loading="lazy"
 				/>
 
 				<form
@@ -158,7 +159,14 @@ const CommentList = ({ postId, comments }: CommentListProps) => {
 					/>
 
 					<button type="submit">
-						<Image src="/emoji.png" alt="emoji" width={16} height={16} className="cursor-pointer" />
+						<Image
+							src="/emoji.png"
+							alt="emoji"
+							width={16}
+							height={16}
+							className="cursor-pointer"
+							loading="lazy"
+						/>
 					</button>
 				</form>
 			</div>
@@ -178,6 +186,7 @@ const CommentList = ({ postId, comments }: CommentListProps) => {
 									width={40}
 									height={40}
 									className="w-10 h-10 rounded-full transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
+									loading="lazy"
 								/>
 							</Link>
 
@@ -226,4 +235,4 @@ const CommentList = ({ postId, comments }: CommentListProps) => {
 	)
 }
 
-export default CommentList
+export default CommentsList

@@ -5,16 +5,16 @@ import { switchLikeForPost } from '@/lib/actions'
 import { useAuth } from '@clerk/nextjs'
 
 import Image from 'next/image'
-import LikeButton from '../LikeButton'
+import LikeButton from '../../LikeButton'
 
-type PostInteractionProps = {
+type PostActionsProps = {
 	postId: number
 	likes: string[]
 	commentNumber: number
 	userId: string
 }
 
-const PostInteraction = ({ postId, likes, commentNumber, userId: postUserId }: PostInteractionProps) => {
+const PostActions = ({ postId, likes, commentNumber, userId: postUserId }: PostActionsProps) => {
 	const { isLoaded, userId } = useAuth()
 	const [likeState, setLikeState] = useState({
 		likeCount: likes.length,
@@ -69,6 +69,7 @@ const PostInteraction = ({ postId, likes, commentNumber, userId: postUserId }: P
 						height={16}
 						alt="comment"
 						className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125"
+						loading="lazy"
 					/>
 
 					<span className="text-gray-300">|</span>
@@ -87,6 +88,7 @@ const PostInteraction = ({ postId, likes, commentNumber, userId: postUserId }: P
 					height={16}
 					alt="share"
 					className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125"
+					loading="lazy"
 				/>
 
 				<span className="text-gray-300">|</span>
@@ -99,4 +101,4 @@ const PostInteraction = ({ postId, likes, commentNumber, userId: postUserId }: P
 	)
 }
 
-export default PostInteraction
+export default PostActions

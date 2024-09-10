@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { auth } from '@clerk/nextjs/server'
 import { User } from '@prisma/client'
 
-import UserInfoCardInteraction from './UserInfoCardInteraction'
+import UserInfoCardActions from './UserInfoCardActions'
 import UpdateUser from './UpdateUser'
 
 import Image from 'next/image'
@@ -84,7 +84,7 @@ const UserInfoCard = async ({ user }: { user: User }) => {
 
 				{user.city && (
 					<div className="flex items-center gap-2">
-						<Image src="/map.png" alt="map" width={16} height={16} />
+						<Image src="/map.png" alt="map" width={16} height={16} loading="lazy" />
 
 						<span>
 							Living in <b>{user.city}</b>
@@ -94,7 +94,7 @@ const UserInfoCard = async ({ user }: { user: User }) => {
 
 				{user.school && (
 					<div className="flex items-center gap-2">
-						<Image src="/school.png" alt="school" width={16} height={16} />
+						<Image src="/school.png" alt="school" width={16} height={16} loading="lazy" />
 
 						<span>
 							Went to <b>{user.school}</b>
@@ -104,7 +104,7 @@ const UserInfoCard = async ({ user }: { user: User }) => {
 
 				{user.work && (
 					<div className="flex items-center gap-2">
-						<Image src="/work.png" alt="work" width={16} height={16} />
+						<Image src="/work.png" alt="work" width={16} height={16} loading="lazy" />
 
 						<span>
 							Works at <b>{user.work}</b>
@@ -114,7 +114,7 @@ const UserInfoCard = async ({ user }: { user: User }) => {
 
 				{user.website && (
 					<div className="flex items-center gap-2">
-						<Image src="/link.png" alt="link" width={16} height={16} />
+						<Image src="/link.png" alt="link" width={16} height={16} loading="lazy" />
 
 						<Link
 							href={user.website}
@@ -129,14 +129,14 @@ const UserInfoCard = async ({ user }: { user: User }) => {
 
 				{user.createdAt && (
 					<div className="flex items-center gap-2">
-						<Image src="/date.png" alt="date" width={16} height={16} />
+						<Image src="/date.png" alt="date" width={16} height={16} loading="lazy" />
 
 						<span>Joined {formattedDate}</span>
 					</div>
 				)}
 
 				{currentUserId && currentUserId !== user.id && (
-					<UserInfoCardInteraction
+					<UserInfoCardActions
 						userId={user.id}
 						isUserBlocked={isUserBlocked}
 						isFollowing={isFollowing}

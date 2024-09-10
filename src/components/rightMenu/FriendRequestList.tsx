@@ -51,6 +51,7 @@ const FriendRequestList = ({ requests }: { requests: RequestWithUser[] }) => {
 								width={40}
 								height={40}
 								className="w-10 h-10 rounded-full object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-blue-500/50"
+								loading="lazy"
 							/>
 						</Link>
 
@@ -70,6 +71,7 @@ const FriendRequestList = ({ requests }: { requests: RequestWithUser[] }) => {
 									width={22}
 									height={22}
 									className="border border-transparent cursor-pointer hover:opacity-80 transition-opacity duration-200"
+									loading="lazy"
 								/>
 							</button>
 						</form>
@@ -82,6 +84,7 @@ const FriendRequestList = ({ requests }: { requests: RequestWithUser[] }) => {
 									width={22}
 									height={22}
 									className="border border-transparent cursor-pointer opacity-80 hover:opacity-100 transition-opacity duration-200"
+									loading="lazy"
 								/>
 							</button>
 						</form>
