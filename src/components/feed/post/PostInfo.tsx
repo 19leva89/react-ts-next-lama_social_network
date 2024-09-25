@@ -27,7 +27,7 @@ const PostInfo = ({ postId }: { postId: number }) => {
 
 					<span className="cursor-pointer">Re-post</span>
 
-					<form action={deletePostWithId}>
+					<form onSubmit={deletePostWithId}>
 						<button className="text-red-500">Delete</button>
 					</form>
 				</div>
