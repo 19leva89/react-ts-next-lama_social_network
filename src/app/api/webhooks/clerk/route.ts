@@ -1,9 +1,11 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
+import { NextRequest, NextResponse } from 'next/server'
+
 import prisma from '@/lib/client'
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
 	// You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
 	const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
 
@@ -19,7 +21,7 @@ export async function POST(req: Request) {
 
 	// If there are no headers, error out
 	if (!svix_id || !svix_timestamp || !svix_signature) {
-		return new Response('Error occured -- no svix headers', {
+		return new NextResponse('Error occured -- no svix headers', {
 			status: 400,
 		})
 	}
@@ -42,7 +44,7 @@ export async function POST(req: Request) {
 		}) as WebhookEvent
 	} catch (err) {
 		console.error('Error verifying webhook:', err)
-		return new Response('Error occured', {
+		return new NextResponse('Error occured', {
 			status: 400,
 		})
 	}
@@ -65,10 +67,10 @@ export async function POST(req: Request) {
 				},
 			})
 
-			return new Response('User has been created!', { status: 200 })
+			return new NextResponse('User has been created!', { status: 200 })
 		} catch (err) {
 			console.log(err)
-			return new Response('Failed to create the user!', { status: 500 })
+			return new NextResponse('Failed to create the user!', { status: 500 })
 		}
 	}
 
@@ -84,12 +86,12 @@ export async function POST(req: Request) {
 				},
 			})
 
-			return new Response('User has been updated!', { status: 200 })
+			return new NextResponse('User has been updated!', { status: 200 })
 		} catch (err) {
 			console.log(err)
-			return new Response('Failed to update the user!', { status: 500 })
+			return new NextResponse('Failed to update the user!', { status: 500 })
 		}
 	}
 
-	return new Response('Webhook received', { status: 200 })
+	return new NextResponse('Webhook received', { status: 200 })
 }
