@@ -1,23 +1,20 @@
 import type { Metadata } from 'next'
+import { PropsWithChildren } from 'react'
 import { ClerkProvider } from '@clerk/nextjs'
 
-import Navbar from '@/components/Navbar'
-import { Inter } from 'next/font/google'
+import { Navbar } from '@/components/shared/navbar'
 
+import { Inter } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
 	title: 'Social Media',
-	description: 'Social media app built with Next.js',
+	description: 'Social media app',
 }
 
-export default function RootLayout({
-	children,
-}: Readonly<{
-	children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: PropsWithChildren) {
 	return (
 		<ClerkProvider>
 			<html lang="en">

@@ -1,8 +1,8 @@
-import Feed from '@/components/feed/Feed'
-import AddPost from '@/components/AddPost'
-import Stories from '@/components/Stories'
-import LeftMenu from '@/components/leftMenu/LeftMenu'
-import RightMenu from '@/components/rightMenu/RightMenu'
+import { Feed } from '@/components/shared/feed'
+import { AddPost } from '@/components/shared/add-post'
+import { Stories } from '@/components/shared/stories'
+import { LeftMenu } from '@/components/shared/left-menu/left-menu'
+import { RightMenu } from '@/components/shared/right-menu/right-menu'
 
 const Homepage = () => {
 	return (

@@ -3,7 +3,7 @@ import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { NextRequest, NextResponse } from 'next/server'
 
-import prisma from '@/lib/client'
+import { prisma } from '@/lib/prisma'
 
 export async function POST(req: NextRequest) {
 	// You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -15,13 +15,13 @@ export async function POST(req: NextRequest) {
 
 	// Get the headers
 	const headerPayload = headers()
-	const svix_id = headerPayload.get('svix-id')
-	const svix_timestamp = headerPayload.get('svix-timestamp')
-	const svix_signature = headerPayload.get('svix-signature')
+	const svix_id = (await headerPayload).get('svix-id')
+	const svix_timestamp = (await headerPayload).get('svix-timestamp')
+	const svix_signature = (await headerPayload).get('svix-signature')
 
 	// If there are no headers, error out
 	if (!svix_id || !svix_timestamp || !svix_signature) {
-		return new NextResponse('Error occured -- no svix headers', {
+		return new NextResponse('Error occurred -- no svix headers', {
 			status: 400,
 		})
 	}
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
 		}) as WebhookEvent
 	} catch (err) {
 		console.error('Error verifying webhook:', err)
-		return new NextResponse('Error occured', {
+		return new NextResponse('Error occurred', {
 			status: 400,
 		})
 	}
@@ -62,8 +62,8 @@ export async function POST(req: NextRequest) {
 				data: {
 					id: evt.data.id,
 					username: JSON.parse(body).data.username,
-					avatar: JSON.parse(body).data.image_url || '/noAvatar.png',
-					cover: '/noCover.png',
+					avatar: JSON.parse(body).data.image_url || '/img/no-avatar.png',
+					cover: '/img/no-cover.png',
 				},
 			})
 
@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
 				},
 				data: {
 					username: JSON.parse(body).data.username,
-					avatar: JSON.parse(body).data.image_url || '/noAvatar.png',
+					avatar: JSON.parse(body).data.image_url || '/img/no-avatar.png',
 				},
 			})
 

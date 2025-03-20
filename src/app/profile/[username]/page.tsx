@@ -1,15 +1,18 @@
-import prisma from '@/lib/client'
-import { auth } from '@clerk/nextjs/server'
-import { notFound } from 'next/navigation'
-
-import Feed from '@/components/feed/Feed'
-import LeftMenu from '@/components/leftMenu/LeftMenu'
-import RightMenu from '@/components/rightMenu/RightMenu'
-
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
+import { auth } from '@clerk/nextjs/server'
 
-const ProfilePage = async ({ params }: { params: { username: string } }) => {
-	const username = params.username
+import { prisma } from '@/lib/prisma'
+import { Feed } from '@/components/shared/feed/feed'
+import { LeftMenu } from '@/components/shared/left-menu/left-menu'
+import { RightMenu } from '@/components/shared/right-menu/right-menu'
+
+interface Props {
+	params: Promise<{ username: string }>
+}
+
+const ProfilePage = async ({ params }: Props) => {
+	const username = (await params).username
 
 	const user = await prisma.user.findFirst({
 		where: {
@@ -28,7 +31,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
 
 	if (!user) return notFound()
 
-	const { userId: currentUserId } = auth()
+	const { userId: currentUserId } = await auth()
 
 	let isBlocked
 
@@ -58,7 +61,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
 					<div className="flex flex-col items-center justify-center">
 						<div className="w-full h-64 relative">
 							<Image
-								src={user.cover || '/noCover.png'}
+								src={user.cover || '/img/no-cover.png'}
 								alt="cover"
 								fill
 								className="rounded-md object-cover"
@@ -67,7 +70,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
 							/>
 
 							<Image
-								src={user.avatar || '/noAvatar.png'}
+								src={user.avatar || '/img/no-avatar.png'}
 								alt="avatar"
 								width={128}
 								height={128}
