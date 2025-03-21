@@ -40,3 +40,5 @@ npx prisma generate
 npx prisma db push
 npx prisma db pull
 npx prisma migrate reset
+
+npx next telemetry status (check if Next.js telemetry is enabled)
