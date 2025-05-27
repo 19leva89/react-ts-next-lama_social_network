@@ -27,7 +27,7 @@ export const Navbar = () => {
 							alt="home page"
 							width={16}
 							height={16}
-							className="w-4 h-4"
+							className="size-4"
 							loading="lazy"
 						/>
 						<span>Homepage</span>
@@ -42,7 +42,7 @@ export const Navbar = () => {
 							alt="friends"
 							width={16}
 							height={16}
-							className="w-4 h-4"
+							className="size-4"
 							loading="lazy"
 						/>
 						<span>Friends</span>
@@ -57,7 +57,7 @@ export const Navbar = () => {
 							alt="stories"
 							width={16}
 							height={16}
-							className="w-4 h-4"
+							className="size-4"
 							loading="lazy"
 						/>
 						<span>Stories</span>
@@ -80,7 +80,7 @@ export const Navbar = () => {
 			{/* RIGHT */}
 			<div className="w-[30%] flex items-center gap-4 xl:gap-8 justify-end">
 				<ClerkLoading>
-					<div className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-gray-500 border-solid border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white" />
+					<div className="inline-block size-4 animate-spin rounded-full border-2 border-gray-500 border-solid border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white" />
 				</ClerkLoading>
 
 				<ClerkLoaded>

@@ -34,7 +34,7 @@ export const Post = async ({ post }: Props) => {
 							width={40}
 							height={40}
 							alt="avatar"
-							className="w-10 h-10 rounded-full transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
+							className="size-10 rounded-full transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
 							loading="lazy"
 						/>
 					</Link>

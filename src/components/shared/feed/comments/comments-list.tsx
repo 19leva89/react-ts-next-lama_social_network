@@ -139,7 +139,7 @@ export const CommentsList = ({ postId, comments }: Props) => {
 					alt="avatar"
 					width={32}
 					height={32}
-					className="w-8 h-8 rounded-full"
+					className="size-8 rounded-full"
 					loading="lazy"
 				/>
 
@@ -168,7 +168,7 @@ export const CommentsList = ({ postId, comments }: Props) => {
 				</form>
 			</div>
 
-			<div className="">
+			<div>
 				{/* COMMENT */}
 				{optimisticComments.map(({ id, user, desc }) => {
 					const likeInfo = optimisticLike.find((like) => like.id === id)
@@ -182,7 +182,7 @@ export const CommentsList = ({ postId, comments }: Props) => {
 									alt="avatar"
 									width={40}
 									height={40}
-									className="w-10 h-10 rounded-full transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
+									className="size-10 rounded-full transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
 									loading="lazy"
 								/>
 							</Link>

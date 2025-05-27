@@ -1,4 +1,4 @@
-This project contains the following technologies
+# This project contains the following technologies
 
 Authentication and User Management:
 - Clerk (Authentication and User Management)
@@ -31,14 +31,15 @@ Webhooks:
 - Svix (sending webhooks)
 
 
-To run the client and server via concurrently:
-npm run all
-npm run lint (loading ESLint checker)
-npm run knip
+# To run the client and server via concurrently:
+`npm i` (install dependencies)
+`npm run all`
+`npm run lint` (loading ESLint checker)
+`npm run knip`
 
-npx prisma generate
-npx prisma db push
-npx prisma db pull
-npx prisma migrate reset
+`npx prisma generate`
+`npx prisma db push`
+`npx prisma db pull`
+`npx prisma migrate reset`
 
-npx next telemetry status (check if Next.js telemetry is enabled)
+`npx next telemetry status` (check if Next.js telemetry is enabled)

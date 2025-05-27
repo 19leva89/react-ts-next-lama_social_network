@@ -1,5 +1,5 @@
-const SettingPage = () => {
-	return <div className="">SettingPage</div>
+const SettingsPage = () => {
+	return <div>SettingsPage</div>
 }
 
-export default SettingPage
+export default SettingsPage

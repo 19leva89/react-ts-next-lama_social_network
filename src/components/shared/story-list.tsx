@@ -85,7 +85,7 @@ export const StoryList = ({ stories, userId }: Props) => {
 								alt="avatar"
 								width={80}
 								height={80}
-								className="w-20 h-20 rounded-full ring-2 object-cover"
+								className="size-20 rounded-full ring-2 object-cover"
 								loading="lazy"
 								onClick={() => open()}
 							/>
@@ -119,7 +119,7 @@ export const StoryList = ({ stories, userId }: Props) => {
 							alt="avatar"
 							width={80}
 							height={80}
-							className="w-20 h-20 rounded-full ring-2"
+							className="size-20 rounded-full ring-2"
 							loading="lazy"
 						/>
 

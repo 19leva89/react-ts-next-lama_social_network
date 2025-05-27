@@ -13,7 +13,7 @@ export const LeftMenu = ({ type }: Props) => {
 		<div className="flex flex-col gap-6">
 			{type === 'home' && <ProfileCard />}
 
-			<div className="p-4 bg-white rounded-lg shadow-md text-sm text-gray-500 flex flex-col gap-2">
+			<div className="flex flex-col gap-2 p-4 rounded-lg bg-white shadow-md text-sm text-gray-500">
 				<Link href="/" className="flex items-center gap-4 p-2 rounded-lg hover:bg-slate-100">
 					<Image src="/img/posts.png" alt="posts" width={20} height={20} loading="lazy" />
 					<span>My Posts</span>

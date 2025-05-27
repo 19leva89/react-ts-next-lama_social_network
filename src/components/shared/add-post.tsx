@@ -10,6 +10,7 @@ import { AddPostButton } from '@/components/shared'
 
 export const AddPost = () => {
 	const { isLoaded, user } = useUser()
+
 	const [img, setImg] = useState<any>()
 	const [desc, setDesc] = useState<string>('')
 	const [error, setError] = useState<string | null>(null)
@@ -49,7 +50,7 @@ export const AddPost = () => {
 				alt="avatar"
 				width={48}
 				height={48}
-				className="w-12 h-12 object-cover rounded-full"
+				className="size-12 object-cover rounded-full"
 				loading="lazy"
 			/>
 
@@ -92,7 +93,7 @@ export const AddPost = () => {
 							alt="emoji"
 							width={20}
 							height={20}
-							className="w-5 h-5 cursor-pointer self-end"
+							className="size-5 cursor-pointer self-end"
 							loading="lazy"
 						/>
 

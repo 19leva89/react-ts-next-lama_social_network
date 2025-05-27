@@ -79,8 +79,8 @@ export const Feed = async ({ username }: Props) => {
 	}
 
 	return (
-		<div className="bg-white rounded-lg">
-			<div className="bg-slate-100 flex flex-col gap-8">
+		<div className="rounded-lg bg-white">
+			<div className="flex flex-col gap-8 bg-slate-100">
 				{posts.length ? posts.map((post) => <Post key={post.id} post={post} />) : 'No posts found!'}
 			</div>
 		</div>

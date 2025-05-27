@@ -460,7 +460,6 @@ export const addStory = async (img: string) => {
 	try {
 		// Deleting existing history and creating a new one in a transaction
 		const existingStory = await prisma.$transaction(async (prisma) => {
-			//  если не будет работать -> заменить deleteMany на delete
 			await prisma.story.deleteMany({
 				where: {
 					userId,

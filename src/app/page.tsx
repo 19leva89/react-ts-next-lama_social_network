@@ -4,7 +4,7 @@ import { Stories } from '@/components/shared/stories'
 import { LeftMenu } from '@/components/shared/left-menu/left-menu'
 import { RightMenu } from '@/components/shared/right-menu/right-menu'
 
-const Homepage = () => {
+const HomePage = () => {
 	return (
 		<div className="flex gap-6 pt-6">
 			<div className="hidden xl:block w-[20%]">
@@ -28,4 +28,4 @@ const Homepage = () => {
 	)
 }
 
-export default Homepage
+export default HomePage

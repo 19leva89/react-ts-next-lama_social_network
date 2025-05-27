@@ -53,7 +53,7 @@ export const ProfileCard = async () => {
 					alt="avatar"
 					width={48}
 					height={48}
-					className="rounded-full object-cover w-12 h-12 absolute left-0 right-0 m-auto -bottom-6 ring-1 ring-white z-10"
+					className="rounded-full object-cover size-12 absolute left-0 right-0 m-auto -bottom-6 ring-1 ring-white z-10"
 					sizes="(max-width: 640px) 10vw, 48px"
 					loading="lazy"
 				/>
@@ -74,7 +74,7 @@ export const ProfileCard = async () => {
 									alt={following.username}
 									width={12}
 									height={12}
-									className="rounded-full object-cover w-3 h-3"
+									className="rounded-full object-cover size-3"
 									sizes="(max-width: 640px) 5vw, (max-width: 768px) 3vw, 2vw"
 									loading="lazy"
 								/>

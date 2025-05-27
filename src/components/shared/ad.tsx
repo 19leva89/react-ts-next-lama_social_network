@@ -39,7 +39,7 @@ export const Ad = ({ size }: Props) => {
 						alt=""
 						width={24}
 						height={24}
-						className="rounded-full w-6 h-6 object-cover"
+						className="rounded-full size-6 object-cover"
 						loading="lazy"
 						sizes={
 							size === 'sm'

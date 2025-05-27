@@ -18,7 +18,7 @@ export const CommentInfo = ({ commentId, openCommentId, toggleMenu, deleteCommen
 				width={26}
 				height={26}
 				onClick={() => toggleMenu(commentId)}
-				className="cursor-pointer w-6 h-6 p-1 border border-transparent rounded-md hover:opacity-80 hover:border-gray-600 hover:rounded-md hover:border-opacity-80 transition-all duration-200"
+				className="cursor-pointer size-6 p-1 border border-transparent rounded-md hover:opacity-80 hover:border-gray-600 hover:rounded-md hover:border-opacity-80 transition-all duration-200"
 				loading="lazy"
 			/>
 			{openCommentId === commentId && (

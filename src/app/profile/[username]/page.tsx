@@ -74,7 +74,7 @@ const ProfilePage = async ({ params }: Props) => {
 								alt="avatar"
 								width={128}
 								height={128}
-								className="w-32 h-32 rounded-full absolute left-0 right-0 m-auto -bottom-16 ring-4 ring-white object-cover"
+								className="size-32 rounded-full absolute left-0 right-0 m-auto -bottom-16 ring-4 ring-white object-cover"
 								loading="lazy"
 							/>
 						</div>
