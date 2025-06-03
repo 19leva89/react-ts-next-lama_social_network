@@ -49,7 +49,7 @@ export const UserInfoCardActions = ({ userId, isUserBlocked, isFollowing, isFoll
 				following: prev.following && false,
 				followingRequestSent: !prev.following && !prev.followingRequestSent ? true : false,
 			}))
-		} catch (err) {}
+		} catch  {}
 	}
 
 	const block = async () => {
@@ -62,7 +62,7 @@ export const UserInfoCardActions = ({ userId, isUserBlocked, isFollowing, isFoll
 				...prev,
 				blocked: !prev.blocked,
 			}))
-		} catch (err) {}
+		} catch  {}
 	}
 
 	const switchButtonText = (state: UserState, hovered: boolean) => {

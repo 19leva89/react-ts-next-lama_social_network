@@ -12,14 +12,14 @@ interface Props {
 
 export const RightMenu = ({ user }: Props) => {
 	return (
-		<div className="flex flex-col gap-6">
+		<div className='flex flex-col gap-6'>
 			{user ? (
 				<>
-					<Suspense fallback="loading...">
+					<Suspense fallback='loading...'>
 						<UserInfoCard user={user} />
 					</Suspense>
 
-					<Suspense fallback="loading...">
+					<Suspense fallback='loading...'>
 						<UserMediaCard user={user} />
 					</Suspense>
 				</>
@@ -29,7 +29,7 @@ export const RightMenu = ({ user }: Props) => {
 
 			<Birthdays />
 
-			<Ad size="md" />
+			<Ad size='md' />
 		</div>
 	)
 }

@@ -23,33 +23,33 @@ export const UserMediaCard = async ({ user }: Props) => {
 	})
 
 	return (
-		<div className="p-4 bg-white rounded-lg shadow-md text-sm flex flex-col gap-4">
+		<div className='flex flex-col gap-4 rounded-lg bg-white p-4 text-sm shadow-md'>
 			{/* TOP */}
-			<div className="flex justify-between items-center font-medium">
-				<span className="text-gray-500">User Media</span>
+			<div className='flex items-center justify-between font-medium'>
+				<span className='text-gray-500'>User Media</span>
 
 				<Link
-					href="/"
-					className="text-blue-500 text-xs p-1 border border-transparent rounded-md hover:opacity-80 hover:border-blue-500 hover:rounded-md hover:border-opacity-80 transition-all duration-200"
+					href='/'
+					className='hover:border-opacity-80 rounded-md border border-transparent p-1 text-xs text-blue-500 transition-all duration-200 hover:rounded-md hover:border-blue-500 hover:opacity-80'
 				>
 					See all
 				</Link>
 			</div>
 
 			{/* BOTTOM */}
-			<div className="flex gap-4 justify-between flex-wrap">
+			<div className='flex flex-wrap justify-between gap-4'>
 				{postsWithMedia.length > 0
 					? postsWithMedia
 							.filter(({ img }) => img)
 							.map(({ id, img }) => (
-								<div className="relative w-1/5 h-24" key={id}>
+								<div className='relative h-24 w-1/5' key={id}>
 									<Image
 										src={img!}
-										alt="post img"
+										alt='post img'
 										fill
-										className="object-cover rounded-md"
-										sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-										loading="lazy"
+										className='rounded-md object-cover'
+										sizes='(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw'
+										loading='lazy'
 									/>
 								</div>
 							))

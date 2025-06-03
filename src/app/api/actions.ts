@@ -181,6 +181,7 @@ export const updateProfile = async (
 	const fields = Object.fromEntries(formData)
 
 	// Filtering empty values
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const filteredFields = Object.fromEntries(Object.entries(fields).filter(([_, value]) => value !== ''))
 
 	// Profile validation scheme

@@ -30,8 +30,8 @@ export const Stories = async () => {
 	})
 
 	return (
-		<div className="p-4 bg-white rounded-lg shadow-md overflow-scroll text-xs scrollbar-hide">
-			<div className="flex gap-8 w-max">
+		<div className='scrollbar-hide overflow-scroll rounded-lg bg-white p-4 text-xs shadow-md'>
+			<div className='flex w-max gap-8'>
 				<StoryList stories={stories} userId={currentUserId} />
 			</div>
 		</div>

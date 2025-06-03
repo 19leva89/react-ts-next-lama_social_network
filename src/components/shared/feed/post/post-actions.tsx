@@ -15,7 +15,8 @@ interface Props {
 }
 
 export const PostActions = ({ postId, likes, commentNumber, userId: postUserId }: Props) => {
-	const { isLoaded, userId } = useAuth()
+	const { userId } = useAuth()
+
 	const [likeState, setLikeState] = useState({
 		likeCount: likes.length,
 		isLiked: userId ? likes.includes(userId) : false,
@@ -43,58 +44,58 @@ export const PostActions = ({ postId, likes, commentNumber, userId: postUserId }
 				likeCount: state.isLiked ? state.likeCount - 1 : state.likeCount + 1,
 				isLiked: !state.isLiked,
 			}))
-		} catch (err) {
+		} catch {
 			setLikeState(likeState)
 		}
 	}
 
 	return (
-		<div className="flex items-center justify-between text-sm my-4">
-			<div className="flex gap-8">
-				<div className="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
+		<div className='my-4 flex items-center justify-between text-sm'>
+			<div className='flex gap-8'>
+				<div className='flex items-center gap-4 rounded-xl bg-slate-50 p-2'>
 					<LikeButton isLiked={optimisticLike.isLiked} likeAction={() => likeAction()} />
 
-					<span className="text-gray-300">|</span>
+					<span className='text-gray-300'>|</span>
 
-					<span className="text-gray-500">
+					<span className='text-gray-500'>
 						{optimisticLike.likeCount || 0}
-						<span className="hidden md:inline"> Likes</span>
+						<span className='hidden md:inline'> Likes</span>
 					</span>
 				</div>
 
-				<div className="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
+				<div className='flex items-center gap-4 rounded-xl bg-slate-50 p-2'>
 					<Image
-						src="/img/comment.png"
+						src='/img/comment.png'
 						width={16}
 						height={16}
-						alt="comment"
-						className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125"
-						loading="lazy"
+						alt='comment'
+						className='cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125'
+						loading='lazy'
 					/>
 
-					<span className="text-gray-300">|</span>
+					<span className='text-gray-300'>|</span>
 
-					<span className="text-gray-500">
+					<span className='text-gray-500'>
 						{commentNumber}
-						<span className="hidden md:inline"> Comments</span>
+						<span className='hidden md:inline'> Comments</span>
 					</span>
 				</div>
 			</div>
 
-			<div className="flex items-center gap-4 bg-slate-50 p-2 rounded-xl">
+			<div className='flex items-center gap-4 rounded-xl bg-slate-50 p-2'>
 				<Image
-					src="/img/share.png"
+					src='/img/share.png'
 					width={16}
 					height={16}
-					alt="share"
-					className="cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125"
-					loading="lazy"
+					alt='share'
+					className='cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125'
+					loading='lazy'
 				/>
 
-				<span className="text-gray-300">|</span>
+				<span className='text-gray-300'>|</span>
 
-				<span className="text-gray-500">
-					<span className="hidden md:inline"> Share</span>
+				<span className='text-gray-500'>
+					<span className='hidden md:inline'> Share</span>
 				</span>
 			</div>
 		</div>
