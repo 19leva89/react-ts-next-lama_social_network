@@ -7,7 +7,7 @@ export const UpdateButton = () => {
 
 	return (
 		<button
-			className="p-2 mt-2 rounded-md bg-blue-500 text-white cursor-pointer disabled:bg-opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-200"
+			className='disabled:bg-opacity-50 mt-2 cursor-pointer rounded-md bg-blue-500 p-2 text-white transition-opacity duration-200 hover:opacity-80 disabled:cursor-not-allowed'
 			disabled={pending}
 		>
 			{pending ? 'Updating...' : 'Update'}

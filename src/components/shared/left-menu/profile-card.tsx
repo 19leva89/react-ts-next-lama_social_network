@@ -37,36 +37,36 @@ export const ProfileCard = async () => {
 	if (!user) return null
 
 	return (
-		<div className="p-4 bg-white rounded-lg shadow-md text-sm flex flex-col gap-6">
-			<div className="h-20 relative">
+		<div className='flex flex-col gap-6 rounded-lg bg-white p-4 text-sm shadow-md'>
+			<div className='relative h-20'>
 				<Image
 					src={user.cover || '/img/no-cover.png'}
-					alt="cover"
+					alt='cover'
 					fill
-					className="rounded-md object-cover"
-					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-					loading="lazy"
+					className='rounded-md object-cover'
+					sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+					loading='lazy'
 				/>
 
 				<Image
 					src={user.avatar || '/img/no-avatar.png'}
-					alt="avatar"
+					alt='avatar'
 					width={48}
 					height={48}
-					className="rounded-full object-cover size-12 absolute left-0 right-0 m-auto -bottom-6 ring-1 ring-white z-10"
-					sizes="(max-width: 640px) 10vw, 48px"
-					loading="lazy"
+					className='absolute right-0 -bottom-6 left-0 z-10 m-auto size-12 rounded-full object-cover ring-1 ring-white'
+					sizes='(max-width: 640px) 10vw, 48px'
+					loading='lazy'
 				/>
 			</div>
 
-			<div className="h-20 flex flex-col gap-2 items-center">
-				<span className="font-semibold">
+			<div className='flex h-20 flex-col items-center gap-2'>
+				<span className='font-semibold'>
 					{user.name && user.surname ? user.name + ' ' + user.surname : user.username}
 				</span>
 
-				<div className="flex items-center gap-4">
+				<div className='flex items-center gap-4'>
 					{user.followers && user.followers.length > 0 && (
-						<div className="flex">
+						<div className='flex'>
 							{user.followers.slice(0, 3).map(({ following }) => (
 								<Image
 									key={following.username}
@@ -74,19 +74,19 @@ export const ProfileCard = async () => {
 									alt={following.username}
 									width={12}
 									height={12}
-									className="rounded-full object-cover size-3"
-									sizes="(max-width: 640px) 5vw, (max-width: 768px) 3vw, 2vw"
-									loading="lazy"
+									className='size-3 rounded-full object-cover'
+									sizes='(max-width: 640px) 5vw, (max-width: 768px) 3vw, 2vw'
+									loading='lazy'
 								/>
 							))}
 						</div>
 					)}
 
-					<span className="text-xs text-gray-500">{user._count.followers} Followers</span>
+					<span className='text-xs text-gray-500'>{user._count.followers} Followers</span>
 				</div>
 
 				<Link href={`/profile/${user.username}`}>
-					<button className="bg-blue-500 text-white text-xs p-2 rounded-md cursor-pointer hover:opacity-80 transition-opacity duration-200">
+					<button className='cursor-pointer rounded-md bg-blue-500 p-2 text-xs text-white transition-opacity duration-200 hover:opacity-80'>
 						My Profile
 					</button>
 				</Link>

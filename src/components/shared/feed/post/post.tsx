@@ -24,23 +24,23 @@ export const Post = async ({ post }: Props) => {
 	const { userId } = await auth()
 
 	return (
-		<div className="flex flex-col gap-4 bg-white p-4 rounded-lg">
+		<div className='flex flex-col gap-4 rounded-lg bg-white p-4'>
 			{/* USER */}
-			<div className="flex items-center justify-between">
-				<div className="flex items-center gap-4">
+			<div className='flex items-center justify-between'>
+				<div className='flex items-center gap-4'>
 					<Link href={`/profile/${post.user.username}`}>
 						<Image
 							src={post.user.avatar || '/img/no-avatar.png'}
 							width={40}
 							height={40}
-							alt="avatar"
-							className="size-10 rounded-full transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
-							loading="lazy"
+							alt='avatar'
+							className='size-10 cursor-pointer rounded-full transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50'
+							loading='lazy'
 						/>
 					</Link>
 
 					<Link href={`/profile/${post.user.username}`}>
-						<span className="font-medium hover:text-blue-500 opacity-80 hover:opacity-100 transition duration-200">
+						<span className='font-medium opacity-80 transition duration-200 hover:text-blue-500 hover:opacity-100'>
 							{post.user.name && post.user.surname
 								? post.user.name + ' ' + post.user.surname
 								: post.user.username}
@@ -52,16 +52,16 @@ export const Post = async ({ post }: Props) => {
 			</div>
 
 			{/* DESC */}
-			<div className="flex flex-col gap-4">
+			<div className='flex flex-col gap-4'>
 				{post.img && (
-					<div className="w-full min-h-96 relative">
+					<div className='relative min-h-96 w-full'>
 						<Image
 							src={post.img}
 							fill
-							className="object-cover rounded-md"
-							alt="post img"
-							sizes="(max-width: 640px) 100vw, (max-width: 768px) 75vw, 50vw"
-							loading="lazy"
+							className='rounded-md object-cover'
+							alt='post img'
+							sizes='(max-width: 640px) 100vw, (max-width: 768px) 75vw, 50vw'
+							loading='lazy'
 						/>
 					</div>
 				)}
@@ -70,7 +70,7 @@ export const Post = async ({ post }: Props) => {
 			</div>
 
 			{/* ACTIONS */}
-			<Suspense fallback="Loading...">
+			<Suspense fallback='Loading...'>
 				<PostActions
 					postId={post.id}
 					userId={post.user.id}
@@ -79,7 +79,7 @@ export const Post = async ({ post }: Props) => {
 				/>
 			</Suspense>
 
-			<Suspense fallback="Loading...">
+			<Suspense fallback='Loading...'>
 				<Comments postId={post.id} />
 			</Suspense>
 		</div>

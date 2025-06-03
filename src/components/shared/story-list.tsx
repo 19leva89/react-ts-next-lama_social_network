@@ -71,7 +71,7 @@ export const StoryList = ({ stories, userId }: Props) => {
 	return (
 		<>
 			<CldUploadWidget
-				uploadPreset="next-social"
+				uploadPreset='next-social'
 				onSuccess={(result, { widget }) => {
 					setImg(result.info)
 					widget.close()
@@ -79,30 +79,30 @@ export const StoryList = ({ stories, userId }: Props) => {
 			>
 				{({ open }) => {
 					return (
-						<div className="flex flex-col items-center gap-2 cursor-pointer relative transition-transform duration-300 ease-in-out hover:scale-110">
+						<div className='relative flex cursor-pointer flex-col items-center gap-2 transition-transform duration-300 ease-in-out hover:scale-110'>
 							<Image
 								src={img?.secure_url || user?.imageUrl || '/img/no-avatar.png'}
-								alt="avatar"
+								alt='avatar'
 								width={80}
 								height={80}
-								className="size-20 rounded-full ring-2 object-cover"
-								loading="lazy"
+								className='size-20 rounded-full object-cover ring-2'
+								loading='lazy'
 								onClick={() => open()}
 							/>
 
 							{img ? (
 								<form action={add}>
-									<button className="text-xs bg-blue-500 p-1 rounded-md text-white cursor-pointer disabled:bg-blue-300 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-200">
+									<button className='cursor-pointer rounded-md bg-blue-500 p-1 text-xs text-white transition-opacity duration-200 hover:opacity-80 disabled:cursor-not-allowed disabled:bg-blue-300'>
 										Send
 									</button>
 								</form>
 							) : (
-								<span onClick={() => open()} className="font-medium">
+								<span onClick={() => open()} className='font-medium'>
 									Add a Story
 								</span>
 							)}
 
-							<div onClick={() => open()} className="absolute text-6xl text-gray-200 top-1">
+							<div onClick={() => open()} className='absolute top-1 text-6xl text-gray-200'>
 								+
 							</div>
 						</div>
@@ -113,17 +113,17 @@ export const StoryList = ({ stories, userId }: Props) => {
 			{/* STORY */}
 			{optimisticStories.map(({ id, user, img }) => (
 				<Link href={'/'} key={id}>
-					<div className="flex flex-col items-center gap-2 cursor-pointer relative transition-transform duration-300 ease-in-out hover:scale-110">
+					<div className='relative flex cursor-pointer flex-col items-center gap-2 transition-transform duration-300 ease-in-out hover:scale-110'>
 						<Image
 							src={img}
-							alt="avatar"
+							alt='avatar'
 							width={80}
 							height={80}
-							className="size-20 rounded-full ring-2"
-							loading="lazy"
+							className='size-20 rounded-full ring-2'
+							loading='lazy'
 						/>
 
-						<span className="font-medium">{user.name || user.username}</span>
+						<span className='font-medium'>{user.name || user.username}</span>
 					</div>
 				</Link>
 			))}

@@ -16,7 +16,8 @@ interface Props {
 
 export const CommentsList = ({ postId, comments }: Props) => {
 	const { user } = useUser()
-	const { isLoaded, userId } = useAuth()
+	const { userId } = useAuth()
+
 	const [desc, setDesc] = useState<string>('')
 	const [commentState, setCommentState] = useState(comments)
 	const [openCommentId, setOpenCommentId] = useState<number | null>(null)
@@ -74,7 +75,7 @@ export const CommentsList = ({ postId, comments }: Props) => {
 					return item
 				}),
 			)
-		} catch (err) {
+		} catch {
 			setLikeState(likeState)
 		}
 	}
@@ -133,36 +134,36 @@ export const CommentsList = ({ postId, comments }: Props) => {
 
 	return (
 		<>
-			<div className="flex items-center gap-4">
+			<div className='flex items-center gap-4'>
 				<Image
 					src={user?.imageUrl || '/img/no-avatar.png'}
-					alt="avatar"
+					alt='avatar'
 					width={32}
 					height={32}
-					className="size-8 rounded-full"
-					loading="lazy"
+					className='size-8 rounded-full'
+					loading='lazy'
 				/>
 
 				<form
 					action={add}
-					className="flex-1 flex items-center justify-between bg-slate-100 rounded-xl text-sm px-6 py-2 w-full"
+					className='flex w-full flex-1 items-center justify-between rounded-xl bg-slate-100 px-6 py-2 text-sm'
 				>
 					<input
-						type="text"
-						placeholder="Write a comment..."
-						className="bg-transparent outline-hidden flex-1"
+						type='text'
+						placeholder='Write a comment...'
+						className='flex-1 bg-transparent outline-hidden'
 						value={desc}
 						onChange={(e) => setDesc(e.target.value)}
 					/>
 
-					<button type="submit">
+					<button type='submit'>
 						<Image
-							src="/img/emoji.png"
-							alt="emoji"
+							src='/img/emoji.png'
+							alt='emoji'
 							width={16}
 							height={16}
-							className="cursor-pointer"
-							loading="lazy"
+							className='cursor-pointer'
+							loading='lazy'
 						/>
 					</button>
 				</form>
@@ -174,24 +175,24 @@ export const CommentsList = ({ postId, comments }: Props) => {
 					const likeInfo = optimisticLike.find((like) => like.id === id)
 
 					return (
-						<div className="flex gap-4 justify-between mt-3 p-3 bg-slate-100 rounded-lg" key={id}>
+						<div className='mt-3 flex justify-between gap-4 rounded-lg bg-slate-100 p-3' key={id}>
 							{/* AVATAR */}
 							<Link href={`/profile/${user.username}`}>
 								<Image
 									src={user.avatar || '/img/no-avatar.png'}
-									alt="avatar"
+									alt='avatar'
 									width={40}
 									height={40}
-									className="size-10 rounded-full transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50"
-									loading="lazy"
+									className='size-10 cursor-pointer rounded-full transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-gray-600/50'
+									loading='lazy'
 								/>
 							</Link>
 
 							{/* DESC */}
-							<div className="flex flex-col gap-2 flex-1">
+							<div className='flex flex-1 flex-col gap-2'>
 								<div>
 									<Link href={`/profile/${user.username}`}>
-										<span className="font-medium hover:text-blue-500 opacity-80 hover:opacity-100 transition duration-200">
+										<span className='font-medium opacity-80 transition duration-200 hover:text-blue-500 hover:opacity-100'>
 											{user.name && user.surname ? `${user.name} ${user.surname}` : user.username}
 										</span>
 									</Link>
@@ -199,15 +200,15 @@ export const CommentsList = ({ postId, comments }: Props) => {
 
 								<p>{desc}</p>
 
-								<div className="flex items-center gap-8 text-xs text-gray-500 mt-2">
-									<div className="flex items-center gap-4">
+								<div className='mt-2 flex items-center gap-8 text-xs text-gray-500'>
+									<div className='flex items-center gap-4'>
 										<LikeButton isLiked={likeInfo?.isLiked} likeAction={() => likeAction(id)} />
 
-										<span className="text-gray-300">|</span>
+										<span className='text-gray-300'>|</span>
 
-										<span className="text-gray-500">
+										<span className='text-gray-500'>
 											{likeInfo?.likeCount || 0}
-											<span className="hidden md:inline"> Likes</span>
+											<span className='hidden md:inline'> Likes</span>
 										</span>
 									</div>
 

@@ -23,14 +23,14 @@ export const FriendRequests = async () => {
 	if (requests.length === 0) return null
 
 	return (
-		<div className="p-4 bg-white rounded-lg shadow-md text-sm flex flex-col gap-4">
+		<div className='flex flex-col gap-4 rounded-lg bg-white p-4 text-sm shadow-md'>
 			{/* TOP */}
-			<div className="flex justify-between items-center font-medium">
-				<span className="text-gray-500">Friend Requests</span>
+			<div className='flex items-center justify-between font-medium'>
+				<span className='text-gray-500'>Friend Requests</span>
 
 				<Link
-					href="/"
-					className="text-blue-500 text-xs p-1 border border-transparent rounded-md hover:opacity-80 hover:border-blue-500 hover:rounded-md hover:border-opacity-80 transition-all duration-200"
+					href='/'
+					className='hover:border-opacity-80 rounded-md border border-transparent p-1 text-xs text-blue-500 transition-all duration-200 hover:rounded-md hover:border-blue-500 hover:opacity-80'
 				>
 					See all
 				</Link>

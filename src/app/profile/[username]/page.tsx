@@ -51,52 +51,52 @@ const ProfilePage = async ({ params }: Props) => {
 	if (isBlocked) return notFound()
 
 	return (
-		<div className="flex gap-6 pt-6">
-			<div className="hidden xl:block w-[20%]">
-				<LeftMenu type="profile" />
+		<div className='flex gap-6 pt-6'>
+			<div className='hidden w-[20%] xl:block'>
+				<LeftMenu type='profile' />
 			</div>
 
-			<div className="w-full lg:w-[70%] xl:w-[50%]">
-				<div className="flex flex-col gap-6">
-					<div className="flex flex-col items-center justify-center">
-						<div className="w-full h-64 relative">
+			<div className='w-full lg:w-[70%] xl:w-[50%]'>
+				<div className='flex flex-col gap-6'>
+					<div className='flex flex-col items-center justify-center'>
+						<div className='relative h-64 w-full'>
 							<Image
 								src={user.cover || '/img/no-cover.png'}
-								alt="cover"
+								alt='cover'
 								fill
-								className="rounded-md object-cover"
-								sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 70vw, 50vw"
-								loading="lazy"
+								className='rounded-md object-cover'
+								sizes='(max-width: 1024px) 100vw, (max-width: 1280px) 70vw, 50vw'
+								loading='lazy'
 							/>
 
 							<Image
 								src={user.avatar || '/img/no-avatar.png'}
-								alt="avatar"
+								alt='avatar'
 								width={128}
 								height={128}
-								className="size-32 rounded-full absolute left-0 right-0 m-auto -bottom-16 ring-4 ring-white object-cover"
-								loading="lazy"
+								className='absolute right-0 -bottom-16 left-0 m-auto size-32 rounded-full object-cover ring-4 ring-white'
+								loading='lazy'
 							/>
 						</div>
 
-						<h1 className="mt-20 mb-4 text-2xl font-medium">
+						<h1 className='mt-20 mb-4 text-2xl font-medium'>
 							{user.name && user.surname ? user.name + ' ' + user.surname : user.username}
 						</h1>
 
-						<div className="flex items-center justify-center gap-12 mb-4">
-							<div className="flex flex-col items-center">
-								<span className="font-medium">{user._count.posts}</span>
-								<span className="text-sm">Posts</span>
+						<div className='mb-4 flex items-center justify-center gap-12'>
+							<div className='flex flex-col items-center'>
+								<span className='font-medium'>{user._count.posts}</span>
+								<span className='text-sm'>Posts</span>
 							</div>
 
-							<div className="flex flex-col items-center">
-								<span className="font-medium">{user._count.followers}</span>
-								<span className="text-sm">Followers</span>
+							<div className='flex flex-col items-center'>
+								<span className='font-medium'>{user._count.followers}</span>
+								<span className='text-sm'>Followers</span>
 							</div>
 
-							<div className="flex flex-col items-center">
-								<span className="font-medium">{user._count.followings}</span>
-								<span className="text-sm">Following</span>
+							<div className='flex flex-col items-center'>
+								<span className='font-medium'>{user._count.followings}</span>
+								<span className='text-sm'>Following</span>
 							</div>
 						</div>
 					</div>
@@ -105,7 +105,7 @@ const ProfilePage = async ({ params }: Props) => {
 				</div>
 			</div>
 
-			<div className="hidden lg:block w-[30%]">
+			<div className='hidden w-[30%] lg:block'>
 				<RightMenu user={user} />
 			</div>
 		</div>
