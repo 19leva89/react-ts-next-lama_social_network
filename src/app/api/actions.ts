@@ -306,7 +306,8 @@ export const addComment = async (postId: number, desc: string) => {
 	const validation = CommentSchema.safeParse(desc)
 
 	if (!validation.success) {
-		console.error('Validation error:', validation.error.errors)
+		console.error('Validation error:', validation.error.issues)
+
 		throw new Error('Invalid comment description.')
 	}
 
@@ -384,7 +385,8 @@ export const addPost = async (formData: FormData, img: string) => {
 	const validation = PostSchema.safeParse(desc)
 
 	if (!validation.success) {
-		console.error('Validation error:', validation.error.errors)
+		console.error('Validation error:', validation.error.issues)
+
 		throw new Error('Invalid post description.')
 	}
 
