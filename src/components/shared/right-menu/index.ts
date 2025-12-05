@@ -1,7 +1,4 @@
-export { Birthdays } from './birthdays'
 export { FriendRequestList } from './friend-request-list'
-export { RightMenu } from './right-menu'
 export { UpdateButton } from './update-button'
 export { UpdateUser } from './update-user'
 export { UserInfoCardActions } from './user-info-card-actions'
-export { UserMediaCard } from './user-media-card'

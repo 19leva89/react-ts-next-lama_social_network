@@ -6,8 +6,8 @@ import { useUser } from '@clerk/nextjs'
 import { useOptimistic, useState } from 'react'
 import { CldUploadWidget } from 'next-cloudinary'
 
-import { Story, User } from '@prisma/client'
 import { addStory } from '@/app/api/actions'
+import { Story, User } from '@/generated/prisma/client'
 
 type StoryWithUser = Story & {
 	user: User

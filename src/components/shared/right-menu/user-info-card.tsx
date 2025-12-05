@@ -2,10 +2,10 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { User } from '@prisma/client'
 import { auth } from '@clerk/nextjs/server'
 
 import { prisma } from '@/lib/prisma'
+import { User } from '@/generated/prisma/client'
 import { UpdateUser, UserInfoCardActions } from '@/components/shared/right-menu'
 
 interface Props {

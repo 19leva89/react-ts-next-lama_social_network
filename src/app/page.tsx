@@ -1,6 +1,6 @@
-import { Feed } from '@/components/shared/feed'
-import { AddPost } from '@/components/shared/add-post'
+import { Feed } from '@/components/shared/feed/feed'
 import { Stories } from '@/components/shared/stories'
+import { AddPost } from '@/components/shared/add-post'
 import { LeftMenu } from '@/components/shared/left-menu/left-menu'
 import { RightMenu } from '@/components/shared/right-menu/right-menu'
 

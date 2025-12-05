@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useActionState, useState } from 'react'
 import { CldUploadWidget } from 'next-cloudinary'
 
-import { User } from '@prisma/client'
+import { User } from '@/generated/prisma/client'
 import { updateProfile } from '@/app/api/actions'
 import { UpdateButton } from '@/components/shared/right-menu'
 

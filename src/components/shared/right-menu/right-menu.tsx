@@ -1,9 +1,10 @@
 import { Suspense } from 'react'
-import { User } from '@prisma/client'
 
 import { Ad } from '@/components/shared/ad'
-import { Birthdays, UserMediaCard } from '@/components/shared/right-menu'
+import { User } from '@/generated/prisma/client'
+import { Birthdays } from '@/components/shared/right-menu/birthdays'
 import { UserInfoCard } from '@/components/shared/right-menu/user-info-card'
+import { UserMediaCard } from '@/components/shared/right-menu/user-media-card'
 import { FriendRequests } from '@/components/shared/right-menu/friend-requests'
 
 interface Props {

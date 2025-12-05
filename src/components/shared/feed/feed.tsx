@@ -3,7 +3,7 @@
 import { auth } from '@clerk/nextjs/server'
 
 import { prisma } from '@/lib/prisma'
-import { Post } from '@/components/shared/feed/post'
+import { Post } from '@/components/shared/feed/post/post'
 
 interface Props {
 	username?: string

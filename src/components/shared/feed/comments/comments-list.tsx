@@ -6,7 +6,8 @@ import { useOptimistic, useState } from 'react'
 import { useAuth, useUser } from '@clerk/nextjs'
 
 import { LikeButton } from '@/components/shared/like-button'
-import { CommentInfo, FeedCommentType } from '@/components/shared/feed/comments'
+import { CommentInfo } from '@/components/shared/feed/comments'
+import { FeedCommentType } from '@/components/shared/feed/comments/comments'
 import { addComment, deleteComment, switchLikeForComment } from '@/app/api/actions'
 
 interface Props {

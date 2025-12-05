@@ -6,10 +6,10 @@ Authentication and User Management:
 Core Technologies:
 - React 19
 - TypeScript
-- Next 15 (framework)
+- Next 16 (framework)
 
 Data Fetching and State Management:
-- Prisma 6 (ORM for DB)
+- Prisma 7 (ORM for DB)
 
 Form and Validation:
 - Zod (first schema validation)

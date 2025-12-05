@@ -1,8 +1,10 @@
+'use server'
+
 import Link from 'next/link'
 import Image from 'next/image'
-import { User } from '@prisma/client'
 
 import { prisma } from '@/lib/prisma'
+import { User } from '@/generated/prisma/client'
 
 interface Props {
 	user: User

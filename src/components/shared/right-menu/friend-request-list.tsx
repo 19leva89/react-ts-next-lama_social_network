@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useOptimistic, useState } from 'react'
-import { FollowRequest, User } from '@prisma/client'
 
+import { FollowRequest, User } from '@/generated/prisma/client'
 import { acceptFollowRequest, declineFollowRequest } from '@/app/api/actions'
 
 type RequestWithUser = FollowRequest & {

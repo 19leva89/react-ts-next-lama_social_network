@@ -1,7 +1,6 @@
-import { Comment as CommentType, User } from '@prisma/client'
-
 import { prisma } from '@/lib/prisma'
 import { CommentsList } from '@/components/shared/feed/comments'
+import { Comment as CommentType, User } from '@/generated/prisma/client'
 
 interface Props {
 	postId: number

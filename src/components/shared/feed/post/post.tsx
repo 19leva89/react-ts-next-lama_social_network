@@ -5,9 +5,9 @@ import { Suspense } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { auth } from '@clerk/nextjs/server'
-import { Post as PostType, User } from '@prisma/client'
 
-import { Comments } from '@/components/shared/feed/comments'
+import { Post as PostType, User } from '@/generated/prisma/client'
+import { Comments } from '@/components/shared/feed/comments/comments'
 import { PostActions, PostInfo } from '@/components/shared/feed/post'
 
 interface Props {
