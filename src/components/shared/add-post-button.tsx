@@ -12,7 +12,7 @@ export const AddPostButton = () => {
 		>
 			{pending ? (
 				<div className='flex items-center gap-2'>
-					<div className='border-white-300 text-surface inline-block size-[10px] animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]' />
+					<div className='border-white-300 text-surface inline-block size-2.5 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]' />
 					Sending
 				</div>
 			) : (

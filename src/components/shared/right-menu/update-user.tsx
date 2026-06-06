@@ -88,7 +88,7 @@ export const UpdateUser = ({ user }: Props) => {
 								<input
 									type='text'
 									placeholder={user.name || 'John'}
-									className='rounded-md p-[13px] text-sm ring-1 ring-gray-300'
+									className='rounded-md p-3.25 text-sm ring-1 ring-gray-300'
 									name='name'
 								/>
 							</div>
@@ -101,7 +101,7 @@ export const UpdateUser = ({ user }: Props) => {
 								<input
 									type='text'
 									placeholder={user.surname || 'Doe'}
-									className='rounded-md p-[13px] text-sm ring-1 ring-gray-300'
+									className='rounded-md p-3.25 text-sm ring-1 ring-gray-300'
 									name='surname'
 								/>
 							</div>
@@ -115,7 +115,7 @@ export const UpdateUser = ({ user }: Props) => {
 								<input
 									type='text'
 									placeholder={user.description || 'Life is beautiful...'}
-									className='rounded-md p-[13px] text-sm ring-1 ring-gray-300'
+									className='rounded-md p-3.25 text-sm ring-1 ring-gray-300'
 									name='description'
 								/>
 							</div>
@@ -129,7 +129,7 @@ export const UpdateUser = ({ user }: Props) => {
 								<input
 									type='text'
 									placeholder={user.city || 'New York'}
-									className='rounded-md p-[13px] text-sm ring-1 ring-gray-300'
+									className='rounded-md p-3.25 text-sm ring-1 ring-gray-300'
 									name='city'
 								/>
 							</div>
@@ -143,7 +143,7 @@ export const UpdateUser = ({ user }: Props) => {
 								<input
 									type='text'
 									placeholder={user.school || 'MIT'}
-									className='rounded-md p-[13px] text-sm ring-1 ring-gray-300'
+									className='rounded-md p-3.25 text-sm ring-1 ring-gray-300'
 									name='school'
 								/>
 							</div>
@@ -157,7 +157,7 @@ export const UpdateUser = ({ user }: Props) => {
 								<input
 									type='text'
 									placeholder={user.work || 'Apple Inc.'}
-									className='rounded-md p-[13px] text-sm ring-1 ring-gray-300'
+									className='rounded-md p-3.25 text-sm ring-1 ring-gray-300'
 									name='work'
 								/>
 							</div>
@@ -171,7 +171,7 @@ export const UpdateUser = ({ user }: Props) => {
 								<input
 									type='text'
 									placeholder={user.website || 'website.dev'}
-									className='rounded-md p-[13px] text-sm ring-1 ring-gray-300'
+									className='rounded-md p-3.25 text-sm ring-1 ring-gray-300'
 									name='website'
 								/>
 							</div>

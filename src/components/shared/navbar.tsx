@@ -1,10 +1,14 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
-import { ClerkLoaded, ClerkLoading, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { ClerkLoaded, ClerkLoading, UserButton, useAuth } from '@clerk/nextjs'
 
 import { MobileMenu } from '@/components/shared'
 
 export const Navbar = () => {
+	const { isSignedIn } = useAuth()
+
 	return (
 		<div className='flex h-24 items-center justify-between'>
 			{/* LEFT */}
@@ -84,23 +88,31 @@ export const Navbar = () => {
 				</ClerkLoading>
 
 				<ClerkLoaded>
-					<SignedIn>
-						<div className='cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125'>
-							<Image src='/img/people.png' alt='people' width={24} height={24} loading='lazy' />
-						</div>
+					{isSignedIn && (
+						<>
+							<div className='cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125'>
+								<Image src='/img/people.png' alt='people' width={24} height={24} loading='lazy' />
+							</div>
 
-						<div className='cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125'>
-							<Image src='/img/messages.png' alt='messages' width={20} height={20} loading='lazy' />
-						</div>
+							<div className='cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125'>
+								<Image src='/img/messages.png' alt='messages' width={20} height={20} loading='lazy' />
+							</div>
 
-						<div className='cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125'>
-							<Image src='/img/notifications.png' alt='notifications' width={20} height={20} loading='lazy' />
-						</div>
+							<div className='cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125'>
+								<Image
+									src='/img/notifications.png'
+									alt='notifications'
+									width={20}
+									height={20}
+									loading='lazy'
+								/>
+							</div>
 
-						<UserButton />
-					</SignedIn>
+							<UserButton />
+						</>
+					)}
 
-					<SignedOut>
+					{!isSignedIn && (
 						<div className='flex items-center gap-2 text-sm'>
 							<Link href='/sign-in'>
 								<Image src='/img/login.png' alt='login' width={20} height={20} loading='lazy' />
@@ -108,7 +120,7 @@ export const Navbar = () => {
 
 							<Link href='/sign-in'>Login/Register</Link>
 						</div>
-					</SignedOut>
+					)}
 				</ClerkLoaded>
 
 				<MobileMenu />
